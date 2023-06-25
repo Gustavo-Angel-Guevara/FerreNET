@@ -1,0 +1,19 @@
+@import '../../../styles/variables.css';
+
+.btn-primary{
+    border: none;
+    outline: none;
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    width: 100%;
+    height: var(--height-button-primary);
+    border-radius: var(--border-radius-input);
+    font-size: var(--font-size-primary);
+    cursor: pointer;
+
+    transition: all 0.3ss ease;
+}
+
+.btn-primary:active{
+    background-color: var(--color-second);
+}
