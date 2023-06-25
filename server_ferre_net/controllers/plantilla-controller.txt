@@ -1,0 +1,30 @@
+//Importar modelo(s)
+
+class NameController{
+
+    //--Función Base--//
+    func1(req, res){
+        const nameModel = new nameModel()
+
+        nameModel.func1()
+        .then(result =>{
+            res.send({
+                'status':true,
+                'msg' : ""
+            })
+        })
+        .catch(err=>{
+            console.error("Error al...", err);
+            res.status(500).send({
+                'status':false,
+                'msg' : "Error al [...] Intento más Tarde"
+            })
+        })
+    }    
+
+    //Más funciones aquí...
+
+}
+
+
+module.exports = NameController;
