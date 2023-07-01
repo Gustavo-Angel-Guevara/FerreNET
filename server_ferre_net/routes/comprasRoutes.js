@@ -6,7 +6,6 @@ const authRouter = express.Router();
 const objAuthController = new AuthController()
 
 // === Rutas para autenticación de usuarios (login, logout...) ===
-
 authRouter.post('/login', objAuthController.login)
 authRouter.get('/cerrar-sesion', objAuthController.login)
 
@@ -15,4 +14,3 @@ authRouter.get('/cerrar-sesion', objAuthController.login)
 // === Fin Rutas para autenticación de usuarios (login, logout...) ===
 
 module.exports = authRouter;
-

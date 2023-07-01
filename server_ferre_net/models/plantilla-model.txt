@@ -1,6 +1,8 @@
+const connection = require("./conexion");
+
 class NameModel{
 
-    constructor(atributo1, //Más atributos aquí...){
+    constructor(atributo1, /*Más atributos aquí...*/){
         this.atributo1 = atributo1;
 
         //Más atributos aquí...

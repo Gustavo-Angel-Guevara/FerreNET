@@ -4,9 +4,9 @@ class NameController{
 
     //--Función Base--//
     func1(req, res){
-        const nameModel = new nameModel()
+        const Model = new nameModel()
 
-        nameModel.func1()
+        Model.func1()
         .then(result =>{
             res.send({
                 'status':true,

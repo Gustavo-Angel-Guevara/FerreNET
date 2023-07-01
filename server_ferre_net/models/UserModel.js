@@ -1,3 +1,6 @@
+const connection = require("./conexion");
+
+
 class UserModel{
 
     #id;
@@ -58,7 +61,7 @@ class UserModel{
 
 
     login(){
-
+        
     }
 
 }
