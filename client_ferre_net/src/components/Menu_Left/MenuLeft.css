@@ -1,0 +1,68 @@
+.menu-left{
+    position: relative;
+    min-height: 100%;
+    width: 100%;
+    border-right: 1px solid var(--color-border-shadow);
+    padding: 2rem;
+
+    overflow: hidden;
+}
+
+
+.menu-left nav{
+    height: 100%;
+}
+
+.menu-left ul:first-child{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    height: 95%;
+}
+
+.menu-left li{
+    list-style: none;
+    padding: 0.7rem 0;
+    margin: 1rem 0;
+}
+
+[class*="option-"]:hover{
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.almacen-menu li{
+    margin: 0rem 0;
+}
+
+.menu-left .logo{
+    position: relative;
+    width: 100%;
+    margin-bottom: 2.5rem;
+}
+
+.menu-left .logo img{
+    width: 100%;
+}
+
+li div{
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+}
+
+li div img{
+    width: 2rem;
+    height: auto;
+}
+
+.arrow{
+    position: absolute;
+    top: 0.5rem;
+    right: 0;
+
+    width: 2.5rem;
+    cursor: pointer;
+}

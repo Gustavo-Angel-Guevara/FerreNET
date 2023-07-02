@@ -9,13 +9,20 @@ import icon_ok from '../../assets/icon/icon_ok.png'
 import logo from '../../assets/images/Logo_Dark.png'
 import Input from '../../components/Input/Input'
 import ButtonPrimary from '../../components/Input/ButtonPrimary/ButtonPrimary'
+import { useNavigate } from 'react-router-dom'
 
 const Login = ({onLogin}) =>{
 
     const [activeArticle, setActiveArticle] = useState(null);
+    const navigate = useNavigate();
 
     const handleClickSetActive = (e, rol) =>{
         setActiveArticle(rol)
+    }
+
+    const handleClick = e =>{
+        onLogin()
+        navigate("/");
     }
 
     return(
@@ -49,7 +56,7 @@ const Login = ({onLogin}) =>{
                         <div className='login-form'>
                             <Input label={"ID"} type="text" placeholder="Ingresa tu ID"></Input>
                             <Input label={"Contraseña"} type="password" placeholder="Ingresa tu Contraseña"></Input>
-                            <ButtonPrimary label={"Ingresar"} type="button"/>
+                            <ButtonPrimary label={"Ingresar"} type="button" onClick={handleClick}/>
                             <p className='text-third forget-password'>Olvide Contraseña</p>
                         </div>
                     </div>  

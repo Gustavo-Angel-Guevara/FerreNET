@@ -1,0 +1,47 @@
+.form-container{
+    position: absolute;
+    top: 3rem;
+    right: 0;
+    width: 25rem;
+    height: 100%;
+    border-left: 1px solid var(--color-border-shadow);
+    transform: translateX(25rem);
+    padding: 1rem;
+    background-color: var(--color-light);
+
+    transition: transform 0.3s ease;
+}
+
+.form-container h3{
+    color: var(--color-text-second);
+}
+
+.form-container.active{
+    transform: translateX(0px)
+}
+
+.form-container .inputs label{
+    color: var(--color-text-third);
+    font-size: var(--text-size-small);
+}
+
+.extra-info{
+    font-size: var(--text-size-xs);
+    color: var(--color-text-third);
+    margin-bottom: 0.3rem;
+}
+
+.form-container .flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.form-container .close{
+    cursor: pointer;
+}
+
+.form-container button{
+    font-size: 0.9rem;
+}
