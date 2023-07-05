@@ -7,7 +7,7 @@ const connection = require("./models/conexion");
 
 const authRouter = require('./routes/authRoutes');
 const orderRoutes = require('./routes/orderRoutes');
-
+const inventarioruta = require('./routes/InvetarioRoutes');
 // === FIN IMPORTACIÓN DE RUTAS ===
 
 
@@ -15,13 +15,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 
-// === RUTAS ===
+// === RUTAS ===npm
 
 // Aquí se definen las rutas del servidor
 
 app.use(authRouter)
 app.use(orderRoutes)
-// Otras rutas...
+app.use(inventarioruta)
 
 // === FIN DE RUTAS ===
 
@@ -31,7 +31,7 @@ app.use((err, req, res, next) => {
     res.status(500).send('Error del servidor');
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 1000;
 app.listen(port, () => {
   console.log(`Servidor en ejecución en el puerto ${port}`);
 });
