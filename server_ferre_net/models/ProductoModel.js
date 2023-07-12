@@ -38,6 +38,17 @@ class ProductoModel {
         });
     }
 
+    obtenerTodos() {
+        const sentenciaSQL = `SELECT * FROM producto`;
+
+        return new Promise((resolve, reject) => {
+            connection.query(sentenciaSQL, (err, rows) => {
+                if (err) return reject(err);
+                return resolve(rows);
+            });
+        });
+    }
+
     actualizar() {
         const sentenciaSQL = `UPDATE producto SET codigo = ?, nombre = ?, descripcion = ?, marca = ?, precio_unitario = ?, precio_menudeo = ?, precio_mayoreo = ?, id_categoria = ?, id_proveedor = ? WHERE idproducto = ?`;
         const values = [this.codigo, this.nombre, this.descripcion, this.marca, this.precio_unitario, this.precio_menudeo, this.precio_mayoreo, this.id_categoria, this.id_proveedor, this.idproducto];
