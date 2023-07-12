@@ -8,6 +8,7 @@ const connection = require("./models/conexion");
 const authRouter = require('./routes/authRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const inventarioruta = require('./routes/InvetarioRoutes');
+const Productorouter = require('./routes/ProductoRoutes');
 // === FIN IMPORTACIÓN DE RUTAS ===
 
 
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(authRouter)
 app.use(orderRoutes)
 app.use(inventarioruta)
+app.use(Productorouter)
 
 // === FIN DE RUTAS ===
 

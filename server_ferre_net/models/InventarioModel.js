@@ -20,12 +20,6 @@ class InventarioModel{
         })
 
     }
-
-    
-
-
-
 }
-
 
 module.exports = InventarioModel;
