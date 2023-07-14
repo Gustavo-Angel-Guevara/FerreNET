@@ -1,0 +1,29 @@
+@import '../../../styles/variables.css';
+
+.input-container{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-size: var(--text-size);
+}
+
+.input-container label{
+    font-weight:var(--text-weight-medium);
+    color: var(--color-text-primary);
+    margin-bottom: 0.2rem;
+}
+
+.input-container select{
+    border: none;
+    outline: none;
+    border-radius: var(--border-radius-input);
+    border: 1px solid var(--border-color-input);
+    height: var(--height-input-primary);
+    width: 100%;
+    padding: 0.3rem 0.5rem;
+}
+
+
+.input-container select:focus{
+    border: 1px solid var(--color-primary);
+}

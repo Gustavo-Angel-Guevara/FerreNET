@@ -1,7 +1,7 @@
 
 import './Input_forms.css'
 
-const InputForms = ({label, ...props}) =>{
+const InputText = ({label, ...props}) =>{
     return(
         <div className='input-container'>
             <label htmlFor="">{label}</label>
@@ -11,4 +11,4 @@ const InputForms = ({label, ...props}) =>{
 }
 
 
-export default InputForms;
+export default InputText;

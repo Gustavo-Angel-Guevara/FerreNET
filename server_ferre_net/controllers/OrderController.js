@@ -32,7 +32,7 @@ class OrderController{
         let {id} = req.params
         
         const Model = OrderModel.getInstance()
-
+        
         Model.set_id_order = id
 
         Model.cancel()

@@ -1,32 +1,29 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Input from './components/Input/Input';
+import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Order from './pages/Orders/Order';
+import Dashboard from './pages/Dashboard/Dashboard';
 
 function App() {
 
-  const handleLogin = () =>{
-    localStorage.setItem('user',true)
-  }
 
-  /*const handleLogout = () =>{
-    setIsAuthenticated(false)
-  }*/
+  const PrivateRoutes = () => {
+    let auth = {'token':localStorage.getItem('user')}
+  return (
+      auth.token ? <Outlet/> : <Navigate to='/login'/>
+    )
+  }
 
   return (
     <Router>
       <Routes>
 
-      <Route path='/login' element={<Login onLogin={handleLogin} />}></Route>
+        <Route exact path='/login' element={<Login />}></Route>
 
-        {localStorage.getItem('user') === 'true' ? 
-          <>
-            <Route path='/' element={<Input/>}></Route>
-            <Route path='/orders' element={<Order></Order>}></Route>
-          </>
-          :
-          <Route path='*' element={<Navigate to="login"/>}></Route>
-        }
+        <Route element={<PrivateRoutes/>}>
+          <Route exact path='/' element={<Dashboard/>}></Route>
+          <Route exact path='/orders' element={<Order></Order>}></Route>
+        </Route>
+          
 
         </Routes>
     </Router>

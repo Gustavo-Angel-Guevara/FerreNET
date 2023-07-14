@@ -9,6 +9,7 @@ import left_arrow from '../../assets/icon/left_arrow.png'
 import out from '../../assets/icon/out_icon.png'
 
 import './MenuLeft.css';
+import { Link } from 'react-router-dom'
 
 
 const MenuLeft = ()=>{
@@ -60,12 +61,14 @@ const MenuLeft = ()=>{
                                     </div>
                                 </li>
 
-                                <li className='option-5'>
-                                    <div>
-                                        <img src="" alt="" />
-                                        <p>Orden Compra</p>
-                                    </div>
-                                </li>
+                                <Link to="/orders">
+                                    <li className='option-5'>
+                                        <div>
+                                            <img src="" alt="" />
+                                            <p>Orden Compra</p>
+                                        </div>
+                                    </li>
+                                </Link>
 
                                 <li className='option-6'>
                                     <div>

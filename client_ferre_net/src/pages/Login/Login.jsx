@@ -7,11 +7,11 @@ import rol_admin from '../../assets/images/rol_administrator.png'
 import rol_employee from '../../assets/images/rol_employee.png'
 import icon_ok from '../../assets/icon/icon_ok.png'
 import logo from '../../assets/images/Logo_Dark.png'
-import Input from '../../components/Input/Input'
-import ButtonPrimary from '../../components/Input/ButtonPrimary/ButtonPrimary'
+import Input from '../../components/Inputs/Input'
+import ButtonPrimary from '../../components/ButtonPrimary/ButtonPrimary'
 import { useNavigate } from 'react-router-dom'
 
-const Login = ({onLogin}) =>{
+const Login = () =>{
 
     const [activeArticle, setActiveArticle] = useState(null);
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ const Login = ({onLogin}) =>{
     }
 
     const handleClick = e =>{
-        onLogin()
+        localStorage.setItem('user','true')
         navigate("/");
     }
 

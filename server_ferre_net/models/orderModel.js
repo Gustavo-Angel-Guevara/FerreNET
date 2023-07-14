@@ -173,9 +173,13 @@ class OrderModel{
 
     cancel(){
         return new Promise((resolve, reject)=>{
+            console.log(this.id_order   )
             let SentenciaSQL = `UPDATE orden SET status = 'Cancelado' WHERE id_orden = '${this.id_order}' and status = 'Enviado'`
             connection.query(`${SentenciaSQL}`, (err, rows) => {
                 if (err) return reject(err)
+
+                console.log(rows)
+
                 return resolve(rows)
             })   
         }) 
