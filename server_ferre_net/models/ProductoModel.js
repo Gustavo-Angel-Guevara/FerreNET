@@ -61,7 +61,7 @@ class ProductoModel {
         });
     }
 
-    eliminar() {
+ eliminar() {
         const sentenciaSQL = `DELETE FROM producto WHERE idproducto = ?`;
         const values = [this.idproducto];
 
