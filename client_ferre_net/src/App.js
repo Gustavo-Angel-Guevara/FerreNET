@@ -1,33 +1,34 @@
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Order from './pages/Orders/Order';
 import Dashboard from './pages/Dashboard/Dashboard';
+import ProductList from './pages/Productos/Producto';
 
 function App() {
-
-
+  
   const PrivateRoutes = () => {
-    let auth = {'token':localStorage.getItem('user')}
-  return (
-      auth.token ? <Outlet/> : <Navigate to='/login'/>
-    )
+    let auth = { token: localStorage.getItem('user') };
+    return auth.token ? (
+      <Outlet />
+    ) : (
+      <Navigate to="/login" />
+    );
   }
 
   return (
     <Router>
       <Routes>
-
-        <Route exact path='/login' element={<Login />}></Route>
-
-        <Route element={<PrivateRoutes/>}>
-          <Route exact path='/' element={<Dashboard/>}></Route>
-          <Route exact path='/orders' element={<Order></Order>}></Route>
+        <Route exact path="/login" element={<Login />} />
+        <Route element={<PrivateRoutes />}>
+          <Route exact path="/" element={<Dashboard />} />
+          <Route exact path="/orders" element={<Order />} />
+          <Route exact path="/products" element={<ProductList />} />
         </Route>
-          
-
-        </Routes>
+      </Routes>
     </Router>
   );
 }
 
 export default App;
+
