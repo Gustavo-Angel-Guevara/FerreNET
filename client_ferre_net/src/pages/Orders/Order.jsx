@@ -185,6 +185,7 @@ const Order = () =>{
                         <div className='table-container'>
                             <Table 
                             headerData={['ID', 'Código', 'Producto', 'Creado', 'Cantidad', 'Status', 'Proveedor', 'Acciones']}
+                            attr={['idorden', 'id_orden', 'producto', 'fecha_creacion', 'cantidad', 'status', 'proveedor_pref']}
                             rowData={ordes}
                             actions={"all"}
                             events = {{deleteOrder, openFormUpdateOrder}}

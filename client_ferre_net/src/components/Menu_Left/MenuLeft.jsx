@@ -85,9 +85,19 @@ const MenuLeft = ()=>{
                                 <p>Gestión de Usuarios</p>
                             </div>
                         </li>
+
+                        <Link to="/history"> 
+                            <li className='option-8'>
+                                <div>
+                                    <img src={user} alt="" />
+                                    <p>Historial de Movimientos</p>
+                                </div>
+                            </li>
+                        </Link>
+                        
                     </div>
 
-                    <li className='option-8'>
+                    <li className='option-9'>
                         <div>
                             <img src={out} alt="" />
                             <p>Salir</p>
