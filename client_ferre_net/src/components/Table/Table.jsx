@@ -3,7 +3,7 @@ import Row from './Row';
 
 import './Table.css'
 
-const Table = ({headerData, rowData, actions, events}) =>{
+const Table = ({headerData, rowData, actions, events, attr}) =>{
     return(
         <div className="table">
             <Header data={headerData}></Header>
@@ -12,9 +12,11 @@ const Table = ({headerData, rowData, actions, events}) =>{
                 rowData && 
                 rowData.map((data, index)=>{
 
+                    const rowDataArr = attr.map(attr=>data[attr]);
+
                     return <Row
                         key={index} 
-                        data={[data.idorden, data.id_orden, data.producto, data.fecha_creacion, data.cantidad, data.status, data.proveedor_pref]}
+                        data={rowDataArr}
                         actions={actions}
                         events = {events}
                     ></Row>

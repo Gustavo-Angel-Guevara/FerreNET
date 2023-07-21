@@ -11,6 +11,12 @@
     font-size: var(--text-size);
 }
 
+.error{
+    font-size: var(--text-size-small);
+    color: var(--color-error);
+    margin-top: 0.2rem;
+}
+
 .login-form .forget-password{
     text-align: right;
     margin-top: 0.3rem;
