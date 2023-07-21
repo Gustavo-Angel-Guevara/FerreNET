@@ -4,6 +4,7 @@ import Login from './pages/Login/Login';
 import Order from './pages/Orders/Order';
 import Dashboard from './pages/Dashboard/Dashboard';
 import ProductList from './pages/Productos/Producto';
+import History from './pages/History/History';
 
 function App() {
   
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/" element={<Dashboard />} />
           <Route exact path="/orders" element={<Order />} />
           <Route exact path="/products" element={<ProductList />} />
+          <Route exact path="/history" element={<History />} />
         </Route>
       </Routes>
     </Router>

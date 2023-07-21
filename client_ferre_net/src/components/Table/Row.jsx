@@ -25,9 +25,9 @@ const Row = ({data, actions, events}) =>{
                 </div>
             
             :
-            data &&
+            (data && events) &&
                 <div className="table-cell actions-all">
-                    <img data-id={data[1]} src={edit} alt="Editar" />
+                    <img data-id={data[1]} src={edit} alt="Editar" onClick={events.openFormUpdateOrder}/>
                     <img data-id={data[1]}  src={delete_icon} alt="Eliminar" onClick={events.deleteOrder}/>
                 </div>
             }

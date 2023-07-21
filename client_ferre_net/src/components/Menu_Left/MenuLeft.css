@@ -8,7 +8,6 @@
     overflow: hidden;
 }
 
-
 .menu-left nav{
     height: 100%;
 }
@@ -34,6 +33,11 @@
 
 .almacen-menu li{
     margin: 0rem 0;
+}
+
+a{
+    text-decoration: none;
+    color: var(--color-dark);
 }
 
 .menu-left .logo{

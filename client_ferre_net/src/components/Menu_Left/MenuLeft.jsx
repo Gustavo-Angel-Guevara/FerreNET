@@ -33,12 +33,14 @@ const MenuLeft = ()=>{
                             </div>
                         </li>
 
-                        <li className='option-2'>
-                            <div>
-                                <img src={products} alt="" />
-                                <p>Productos</p>
-                            </div>
-                        </li>
+                        <Link to="/products">
+                            <li className='option-2'>
+                                <div>
+                                    <img src={products} alt="" />
+                                    <p>Productos</p>
+                                </div>
+                            </li>
+                        </Link>
 
                         <li className='option-3'>
                             <div >
@@ -85,9 +87,19 @@ const MenuLeft = ()=>{
                                 <p>Gestión de Usuarios</p>
                             </div>
                         </li>
+
+                        <Link to="/history"> 
+                            <li className='option-8'>
+                                <div>
+                                    <img src={user} alt="" />
+                                    <p>Historial de Movimientos</p>
+                                </div>
+                            </li>
+                        </Link>
+                        
                     </div>
 
-                    <li className='option-8'>
+                    <li className='option-9'>
                         <div>
                             <img src={out} alt="" />
                             <p>Salir</p>

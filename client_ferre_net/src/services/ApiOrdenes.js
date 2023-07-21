@@ -27,6 +27,10 @@ class ApiOrdenes{
         return fetch(`http://${config.serverIP}:${config.port}/orders`)
     }
 
+    getOCById(){
+        return fetch(`http://${config.serverIP}:${config.port}/order/${this.id}`)
+    }
+
 
     createOC(){
         return fetch(`http://${config.serverIP}:${config.port}/create-order`, this.settings)
