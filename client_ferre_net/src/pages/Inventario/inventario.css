@@ -1,0 +1,27 @@
+.page {
+    position: relative;
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    min-height: 100vh; 
+}
+  
+  .btn-content {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; 
+  }
+  
+  .container {
+    position: relative;
+    padding: 0 2rem;
+    margin-top: 1rem !important;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  .container-page {
+    overflow: hidden;
+    position: relative;
+  }
