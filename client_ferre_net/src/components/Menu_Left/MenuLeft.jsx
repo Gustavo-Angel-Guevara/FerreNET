@@ -33,12 +33,14 @@ const MenuLeft = ()=>{
                             </div>
                         </li>
 
-                        <li className='option-2'>
-                            <div>
-                                <img src={products} alt="" />
-                                <p>Productos</p>
-                            </div>
-                        </li>
+                        <Link to="/products">
+                            <li className='option-2'>
+                                <div>
+                                    <img src={products} alt="" />
+                                    <p>Productos</p>
+                                </div>
+                            </li>
+                        </Link>
 
                         <li className='option-3'>
                             <div >

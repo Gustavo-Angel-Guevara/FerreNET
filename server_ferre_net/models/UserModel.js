@@ -61,7 +61,15 @@ class UserModel{
 
 
     login(){
-        
+        const sentenciaSQL = `SELECT *FROM users WHERE psw = '${this.#password}' AND id = '${this.#id}' AND id_rol = '${parseInt(this.#rol)}'`;
+
+        return new Promise((resolve, reject) => {
+          connection.query(sentenciaSQL, (err, rows) => {
+            if (err) return reject(err);
+            if(rows.length == 0) return reject("Error en la contraseña, id o rol")
+            return resolve(rows);
+          });
+        });
     }
 
 }
