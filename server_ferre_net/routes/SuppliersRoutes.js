@@ -8,10 +8,12 @@ const objController = new SuppliersController()
 
 // === EndPoints ===
 
-//nameRouter.post('/...', objController.fun1)
 SuppliersRouter.get('/suppliers', objController.getSuppliers)
-//nameRouter.put('/...', objController.fun1)
-//nameRouter.delete('/...', objController.fun2)
+SuppliersRouter.put('/actualizarproveedor/:idproveedores', objController.actualizar);
+SuppliersRouter.get('/proveedores/:idproveedores', objController.obtenerProveedorPorId);
+SuppliersRouter.post('/nuevoproveedor', objController.guardar);
+SuppliersRouter.delete('/proveedores/:idproveedores', objController.eliminar);
+
 
 //Agregar más rutas....
 
