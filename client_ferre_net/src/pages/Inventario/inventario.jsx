@@ -1,4 +1,7 @@
-const FerreteriaCliente = () => {
+import React from "react";
+import './inventario.css'
+
+const Inventario = () => {
     const [productos, setProductos] = React.useState([]);
     const [nuevoProducto, setNuevoProducto] = React.useState({
       cantidad: '',
@@ -98,8 +101,5 @@ const FerreteriaCliente = () => {
     );
   };
   
-  ReactDOM.render(
-    <FerreteriaCliente />,
-    document.getElementById('root')
-  );
+  export default Inventario;
   

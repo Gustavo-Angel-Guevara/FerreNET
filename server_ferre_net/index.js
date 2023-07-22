@@ -9,6 +9,7 @@ const authRouter = require('./routes/authRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const inventarioruta = require('./routes/InvetarioRoutes');
 const Productorouter = require('./routes/ProductoRoutes');
+const SuppliersRouter = require('./routes/SuppliersRoutes');
 // === FIN IMPORTACIÓN DE RUTAS ===
 
 app.use(express.json());
@@ -31,6 +32,7 @@ app.use(authRouter)
 app.use(orderRoutes)
 app.use(inventarioruta)
 app.use(Productorouter)
+app.use(SuppliersRouter)
 
 // === FIN DE RUTAS ===
 
