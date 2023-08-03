@@ -10,11 +10,21 @@ class SuppliersController{
 
         Model.getSuppliers()
         .then(result =>{
-            res.send({
+
+          if(result.length == 0){
+              res.send({
                 'status':true,
-                'msg' : "",
-                'data':result
+                'msg' : "No hay Registros",
+                'data':null
             })
+          }else{
+            res.send({
+              'status':true,
+              'msg' : "",
+              'data':result
+            })
+          }
+            
         })
         .catch(err=>{
             console.error("Error al...", err);
@@ -26,14 +36,19 @@ class SuppliersController{
     }   
 
     obtenerProveedorPorId(req, res) {
-        const { idproveedor } = req.params;
-    
-        const model = new ProveedorModel(idproveedor);
-    
+        const { idproveedores } = req.params;
+
+        const model = new SuppliersModel();
+        model.setId = idproveedores
+
         model.obtenerPorId()
           .then(rows => {
             if (rows.length > 0) {
-              res.status(200).json(rows[0]);
+              res.status(200)
+              res.send({
+                status:200,
+                data : rows
+              })
             } else {
               res.status(404).json({ error: "Proveedor no encontrado" });
             }
@@ -47,7 +62,7 @@ class SuppliersController{
     guardar(req, res) {
     const { nombre, correo, telefono, direccion, sitio_web } = req.body;
 
-    const proveedor = new ProveedorModel(null, nombre, correo, telefono, direccion, sitio_web);
+    const proveedor = new SuppliersModel(null, nombre, correo, telefono, direccion, sitio_web);
 
     proveedor.guardar()
       .then(result => {
@@ -63,13 +78,11 @@ class SuppliersController{
     actualizar(req, res) {
         const { idproveedor, nombre, correo, telefono, direccion, sitio_web } = req.body;
 
-        const proveedor = new ProveedorModel(idproveedor, nombre, correo, telefono, direccion, sitio_web);
+        const proveedor = new SuppliersModel(idproveedor, nombre, correo, telefono, direccion, sitio_web);
 
-        proveedor
-        .actualizar()
+        proveedor.actualizar()
         .then(result => {
-            // Procesar el resultado
-            res.send(result);
+          res.status(200).send({msg:'Proveedor Actualizado Correctamente'});
         })
         .catch(err => {
             // Manejar el error
@@ -78,20 +91,21 @@ class SuppliersController{
     }
 
     eliminar(req, res) {
-        const { idproveedor } = req.params;
-        const model = new ProveedorModel(idproveedor);
+        const { idproveedores } = req.params;
+        const model = new SuppliersModel();
+        model.setId = idproveedores;
 
         model.eliminar()
         .then(result => {
             if (result.affectedRows > 0) {
-            res.status(200).json({ message: "Proveedor eliminado exitosamente" });
+              res.status(200).send({ message: "Proveedor eliminado exitosamente" });
             } else {
-            res.status(404).json({ error: "Proveedor no encontrado" });
+              res.status(404).send({ error: "Proveedor no encontrado" });
             }
         })
         .catch(err => {
             console.error("Error al eliminar el proveedor", err);
-            res.status(500).json({ error: "Error al eliminar el proveedor" });
+            res.status(500).send({ error: "Error al eliminar el proveedor" });
         });
     }
 

@@ -22,7 +22,6 @@ const Order = () =>{
 
     //Form's States
     const [display, setDisplay] = useState('')
-    const [displayForm1, setDisplayForm1] = useState('')
     const [displayForm2, setDisplayForm2] = useState('')
     const [dataForm, setDataForm] = useState({id_producto:'', producto:'', cantidad:'0', especificaciones:'', status:'Enviado', fecha_creacion:new DateUtils().getCurrentDate() ,fecha_requerida:'', presupuesto_max:'$', proveedor_pref:''})
     const [newData, setNewData] = useState({})
@@ -184,11 +183,11 @@ const Order = () =>{
 
                         <div className='table-container'>
                             <Table 
-                            headerData={['ID', 'Código', 'Producto', 'Creado', 'Cantidad', 'Status', 'Proveedor', 'Acciones']}
-                            attr={['idorden', 'id_orden', 'producto', 'fecha_creacion', 'cantidad', 'status', 'proveedor_pref']}
+                            headerData={['Código', 'Producto', 'Creado', 'Cantidad', 'Status', 'Proveedor', 'Acciones']}
+                            attr={['id_orden', 'producto', 'fecha_creacion', 'cantidad', 'status', 'proveedor_pref']}
                             rowData={ordes}
                             actions={"all"}
-                            events = {{deleteOrder, openFormUpdateOrder}}
+                            events = {{delete:deleteOrder, openFormUpdate:openFormUpdateOrder}}
                             ></Table>
                         </div>  
                     }

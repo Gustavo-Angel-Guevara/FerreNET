@@ -42,12 +42,14 @@ const MenuLeft = ()=>{
                             </li>
                         </Link>
 
-                        <li className='option-3'>
-                            <div >
-                                <img src={proveedores} alt="" />
-                                <p>Proveedores</p>
-                            </div>
-                        </li>
+                        <Link to="/proveedores">
+                            <li className='option-3'>
+                                <div >
+                                    <img src={proveedores} alt="" />
+                                    <p>Proveedores</p>
+                                </div>
+                            </li>
+                        </Link>
 
                         <li>
                             <div className='option-0'>

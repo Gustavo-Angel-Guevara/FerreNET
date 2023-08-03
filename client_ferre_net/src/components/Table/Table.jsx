@@ -7,7 +7,6 @@ const Table = ({headerData, rowData, actions, events, attr}) =>{
     return(
         <div className="table">
             <Header data={headerData}></Header>
-
             {
                 rowData && 
                 rowData.map((data, index)=>{
