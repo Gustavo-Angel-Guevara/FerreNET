@@ -1,10 +1,4 @@
-.page {
-    position: relative;
-    display: grid;
-    grid-template-columns: 15rem 1fr;
-    min-height: 100%;
-  }
-  
+ 
   .btn-content {
     display: flex;
     justify-content: flex-end;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import MenuLeft from '../../components/Menu_Left/MenuLeft';
 import './Producto.css';
 import Header from '../../components/Header/Header';
@@ -7,6 +7,7 @@ import Form from '../../components/Form/Form';
 import Table from '../../components/Table/Table';
 import ApiProductos from '../../services/ApiProductos';
 import InputText from '../../components/Inputs/InputText';
+import Context from '../../context/Interface';
 
 
 const Producto = () => {
@@ -24,6 +25,9 @@ const Producto = () => {
   });
   const [newData, setNewData] = useState({});
   const [productos, setProductos] = useState([]);
+
+  const {menuHide} = useContext(Context);
+
 
   useEffect(() => {
     new ApiProductos()
@@ -105,7 +109,7 @@ const Producto = () => {
   };
 
   return (
-    <div className='page'>
+    <div className={`page ${menuHide && 'active'}`}>
       <MenuLeft />
       <div className='container-page'>
         <Header title={'Productos'} />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import MenuLeft from '../../components/Menu_Left/MenuLeft';
 import Header from '../../components/Header/Header';
 import ButtonPrimary from '../../components/ButtonPrimary/ButtonPrimary';
@@ -7,6 +7,9 @@ import ApiSuppliers from '../../services/ApiSuppliers';
 import InputText from '../../components/Inputs/InputText';
 import Form from '../../components/Form/Form';
 import Modal from '../../components/Modal/Modal';
+
+import Context from '../../context/Interface';
+
 
 let initDataForm = {idproveedor:'', nombre:'', correo:'', telefono:'', direccion:'', sitio_web:''}
 
@@ -21,6 +24,8 @@ const Proveedores = ()=>{
 
     const [displayModal, setDisplayModal] = useState(false)
     const [idProv, setIdProv] = useState()
+
+    const {menuHide} = useContext(Context);
 
     useEffect(()=>{
         let objApiSuppliers = new ApiSuppliers()
@@ -153,7 +158,7 @@ const Proveedores = ()=>{
     }
 
     return(
-        <div className='page'>
+        <div className={`page ${menuHide && 'active'}`}>
             {displayModal &&
                 <Modal text="¿Desea Eliminar este Registro?" type="delete" event = {deleteProveedor} setDisplayModal = {setDisplayModal}/>
             }

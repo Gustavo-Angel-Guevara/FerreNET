@@ -40,3 +40,12 @@
     font-size: var(--text-size-small);
     color: var(--color-text-third);
 }
+
+.container-modal label::selection, h3::selection{
+    user-select: none;
+}
+
+
+.container-modal  h3:hover{
+    cursor: default;
+}

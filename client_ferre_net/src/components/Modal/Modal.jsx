@@ -26,8 +26,19 @@ const Modal = ({text, type, event, setDisplayModal}) =>{
                                     <ButtonPrimary label="Eliminar" style={{backgroundColor: "var(--color-warning)"}} onClick={event}></ButtonPrimary>
                                 </div>
                                 <div className='check'>
-                                    <input type="checkbox" name="" id="" onChange={(e)=>{localStorage.setItem('deleteModal', e.target.checked)}}/>
-                                    <label htmlFor="">No preguntar de Nuevo</label>
+                                    <input type="checkbox" name="" id="checkInput" onChange={(e)=>{localStorage.setItem('deleteModal', e.target.checked)}}/>
+                                    <label htmlFor="checkInput">No preguntar de Nuevo</label>
+                                </div>
+                            </div>
+                        :
+                        type === "info-noAskAgain" ? 
+                            <div>
+                                <div className='btns'>
+                                    <ButtonPrimary label="Entiendo" onClick={(e)=>setDisplayModal(false)}></ButtonPrimary>
+                                </div>
+                                <div className='check'>
+                                    <input type="checkbox" name="" id="checkInput" onChange={(e)=>{localStorage.setItem('warnModalResposive', e.target.checked)}}/>
+                                    <label htmlFor="checkInput">No Mostrar de Nuevo</label>
                                 </div>
                             </div>
                         :

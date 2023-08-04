@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import MenuLeft from '../../components/Menu_Left/MenuLeft';
 
 import './Order.css'
@@ -15,6 +15,8 @@ import InputDate from '../../components/Inputs/InputDate/InputDate';
 import InputSelect from '../../components/Inputs/InputSelect/InputDate';
 import DateUtils from '../../utils/DateUtils';
 
+import Context from '../../context/Interface';
+
 
 let initDataForm = {id_producto:'', producto:'', cantidad:'0', especificaciones:'', status:'Enviado', fecha_creacion:new DateUtils().getCurrentDate() ,fecha_requerida:'', presupuesto_max:'$', proveedor_pref:''}
 
@@ -28,8 +30,9 @@ const Order = () =>{
     //
     const [ordes, setOrders] = useState([])
 
-    useEffect(()=>{
+    const {menuHide} = useContext(Context);
 
+    useEffect(()=>{
         new ApiOrdenes().getOCs()
         .then(res => res.ok ? res.json() : Promise.reject(res))
         .then(json => {
@@ -42,7 +45,6 @@ const Order = () =>{
         })
         
     }, [newData])
-
 
     const openForm = (numForm) =>{
         if(numForm === 1){
@@ -164,7 +166,7 @@ const Order = () =>{
     
 
     return(
-        <div className='page'>
+        <div className={`page${menuHide ? ' active' :''}`}>
             
             <MenuLeft/>
 

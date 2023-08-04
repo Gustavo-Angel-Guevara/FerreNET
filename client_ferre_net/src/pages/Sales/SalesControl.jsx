@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ButtonPrimary from "../../components/ButtonPrimary/ButtonPrimary";
 import Form from "../../components/Form/Form";
 import Header from "../../components/Header/Header"
@@ -14,6 +14,7 @@ import { SalesControlClass } from "../../utils/salesControl";
 import DateUtils from "../../utils/DateUtils";
 import Modal from "../../components/Modal/Modal";
 
+import Context from '../../context/Interface';
 
 
 const SalesControl = () =>{
@@ -27,6 +28,25 @@ const SalesControl = () =>{
     const [displayModal, setDisplayModal] = useState(false)
     const [idProv, setIdProv] = useState()
 
+    const {menuHide, setMenuHide} = useContext(Context);
+
+    useEffect(()=>{
+        window.addEventListener('resize', resposive)
+
+        return () => {
+        window.removeEventListener('resize', resposive)
+        }
+    })
+
+    const resposive = (e) =>{
+        console.log(e)
+        if(e.target.innerWidth <= 1117){
+            setMenuHide(true)
+        }else{
+            setMenuHide(false)
+        }
+    }
+
     const displayForm = (e) =>{
 
         if(dataForm.product === ""){
@@ -34,7 +54,6 @@ const SalesControl = () =>{
         }else{
             setDisplay('active')
             searchProduct(e);
-            setError(null)
         }
     }
 
@@ -86,7 +105,7 @@ const SalesControl = () =>{
     }
 
     return(
-        <div  className='page'>
+        <div className={`page ${menuHide && 'active'}`}>
 
             <MenuLeft/>
 

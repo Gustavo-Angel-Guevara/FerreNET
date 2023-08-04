@@ -36,3 +36,15 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+.page {
+    position: relative;
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    transition: all 0.3s ease !important;
+    min-height: 100%;
+}
+
+.page.active{
+    grid-template-columns: 4rem 1fr !important;
+}

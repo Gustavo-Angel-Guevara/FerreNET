@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import MenuLeft from '../../components/Menu_Left/MenuLeft';
 
 import './Dashboard.css'
 import Header from '../../components/Header/Header';
+import Context from '../../context/Interface';
+
 
 
 const Dashboard = () =>{
+
+    const {menuHide} = useContext(Context)
+
+
     return(
-        <div className='page'>
+        <div className={`page${menuHide ? ' active' :''}`}>
             
             <MenuLeft/>
 

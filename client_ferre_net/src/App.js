@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Order from './pages/Orders/Order';
@@ -21,20 +21,20 @@ function App() {
   }
 
   return (
-    <Router>
-      <Routes>
-        <Route exact path="/login" element={<Login />} />
-        <Route element={<PrivateRoutes />}>
-          <Route exact path="/" element={<Dashboard />} />
-          <Route exact path="/orders" element={<Order />} />
-          <Route exact path="/proveedores" element={<Proveedores />} />
-          <Route exact path="/products" element={<ProductList />} />
-          <Route exact path="/history" element={<History />} />
-          <Route exact path="/inventario" element={<Inventario />} />
-          <Route exact path="/SalesControl" element={<SalesControl/>}></Route>
-        </Route>
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+            <Route exact path="/login" element={<Login />} />
+            <Route element={<PrivateRoutes />}>
+            <Route exact path="/" element={<Dashboard />} />
+            <Route exact path="/orders" element={<Order />} />
+            <Route exact path="/proveedores" element={<Proveedores />} />
+            <Route exact path="/products" element={<ProductList />} />
+            <Route exact path="/history" element={<History />} />
+            <Route exact path="/inventario" element={<Inventario />} />
+            <Route exact path="/SalesControl" element={<SalesControl/>}></Route>
+          </Route>
+        </Routes>
+      </Router>
   );
 }
 

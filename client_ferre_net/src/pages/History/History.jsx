@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import MenuLeft from '../../components/Menu_Left/MenuLeft';
 import Header from "../../components/Header/Header";
 import Table from "../../components/Table/Table";
 
+import Context from '../../context/Interface';
 
 
 const History = ()=>{
 
     const [History, setHistory] = useState(true)
 
+    const {menuHide} = useContext(Context);
+
     return(
-        <div className="page">
+        <div className={`page ${menuHide && 'active'}`}>
             <MenuLeft/>
             <div className='container-page'>
                 <Header title={"Historial de Movimientos"}/>
