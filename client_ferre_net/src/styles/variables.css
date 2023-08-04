@@ -3,6 +3,8 @@
     --color-light : #FFFFFF;
     --color-dark : #1E1E1E;
 
+    --color-dark-opacity : #1e1e1e63;
+
     --color-primary : #FB9144;
     --color-second : #F8BC91;
     --color-text-primary : #1E1E1E;
@@ -10,6 +12,7 @@
     --color-text-third: #787878;
     --color-border-shadow : #C7C7C7;
     --color-error: #ff5858;
+    --color-warning: #e25151;
 
     --text-size : 1rem;
     --text-size-small : 0.8rem;

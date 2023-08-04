@@ -21,15 +21,28 @@ const Row = ({data, actions, events}) =>{
             
             {actions === 'cancel' ?
                 <div className="table-cell actions">
-                    <img src={cancel} alt="" />
+                    <img src={cancel} alt="" data-id={data[0]} onClick={events.cancel}/>
                 </div>
             
             :
             (data && events) &&
-                <div className="table-cell actions-all">
-                    <img data-id={data[0]} src={edit} alt="Editar" onClick={events.openFormUpdate}/>
-                    <img data-id={data[0]}  src={delete_icon} alt="Eliminar" onClick={events.delete}/>
-                </div>
+                (actions === 'delete') ?
+
+                    <div className="table-cell actions">
+                        <img data-id={data[0]}  src={delete_icon} alt="Eliminar" onClick={events.delete}/>
+                    </div>
+
+                    :
+                        (actions === 'edit') ?
+                            <div className="table-cell actions">
+                                <img data-id={data[0]} src={edit} alt="Editar" onClick={events.openFormUpdate}/>
+                            </div>
+                        :
+                        (actions === 'all') &&
+                            <div className="table-cell actions-all">
+                                <img data-id={data[0]} src={edit} alt="Editar" onClick={events.openFormUpdate}/>
+                                <img data-id={data[0]}  src={delete_icon} alt="Eliminar" onClick={events.delete}/>
+                            </div>
             }
 
         </div>

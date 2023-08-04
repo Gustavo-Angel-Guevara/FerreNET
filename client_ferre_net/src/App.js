@@ -7,6 +7,7 @@ import ProductList from './pages/Productos/Producto';
 import History from './pages/History/History';
 import Inventario from './pages/Inventario/inventario';
 import Proveedores from './pages/Proveedores/Proveedores';
+import SalesControl from './pages/Sales/SalesControl';
 
 function App() {
   
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/products" element={<ProductList />} />
           <Route exact path="/history" element={<History />} />
           <Route exact path="/inventario" element={<Inventario />} />
+          <Route exact path="/SalesControl" element={<SalesControl/>}></Route>
         </Route>
       </Routes>
     </Router>

@@ -6,6 +6,7 @@ import Table from '../../components/Table/Table';
 import ApiSuppliers from '../../services/ApiSuppliers';
 import InputText from '../../components/Inputs/InputText';
 import Form from '../../components/Form/Form';
+import Modal from '../../components/Modal/Modal';
 
 let initDataForm = {idproveedor:'', nombre:'', correo:'', telefono:'', direccion:'', sitio_web:''}
 
@@ -17,6 +18,9 @@ const Proveedores = ()=>{
     const [displayForm2, setDisplayForm2] = useState('')
     const [dataForm, setDataForm] = useState(initDataForm)
     const [newData, setNewData] = useState({})
+
+    const [displayModal, setDisplayModal] = useState(false)
+    const [idProv, setIdProv] = useState()
 
     useEffect(()=>{
         let objApiSuppliers = new ApiSuppliers()
@@ -83,14 +87,20 @@ const Proveedores = ()=>{
         })
     }
 
+    const deleteAction = (e) =>{
+        setIdProv(e.target.dataset.id)
+        setDisplayModal(true)
+    }
+
     const deleteProveedor = (e) =>{
         const objApiSuppliers = new ApiSuppliers()
-        objApiSuppliers.setId = e.target.dataset.id;
+        objApiSuppliers.setId = idProv;
 
         objApiSuppliers.deleteSupplier()
         .then(res => res.ok ? res.json() : Promise(res))
         .then(json=>{
             setNewData(json)
+            setDisplayModal(false)
         })
         .catch(err=>{
             console.log("Error al Eliminar el Proveedor")
@@ -144,6 +154,9 @@ const Proveedores = ()=>{
 
     return(
         <div className='page'>
+            {displayModal &&
+                <Modal text="¿Desea Eliminar este Registro?" type="delete" event = {deleteProveedor} setDisplayModal = {setDisplayModal}/>
+            }
             <MenuLeft/>
 
             <div className='container-page'>
@@ -160,7 +173,7 @@ const Proveedores = ()=>{
                             attr={['idproveedor', 'nombre', 'correo', 'telefono', 'direccion', 'sitio_web']}
                             rowData={proveedores}
                             actions={"all"}
-                            events = {{delete : deleteProveedor, openFormUpdate : openFormUpdateProveedor}}
+                            events = {{delete : deleteAction, openFormUpdate : openFormUpdateProveedor}}
                             ></Table>
                     </div>  
 

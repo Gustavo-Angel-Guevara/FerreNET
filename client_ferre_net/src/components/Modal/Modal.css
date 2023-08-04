@@ -1,0 +1,42 @@
+.container-modal{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--color-dark-opacity);
+}
+
+.container-modal .modal{
+    text-align: center;
+    width: 22rem;
+    padding: 2rem 2rem;
+    border-radius: calc( var(--border-radius-input) + 0.1rem);
+    background-color: var(--color-light);
+}
+
+.container-modal .btns{
+    display: flex;
+    gap: 1rem;
+}
+
+.container-modal h3{
+    margin-bottom: 1rem;
+    color: var(--color-primary );
+}
+
+.container-modal .check{
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+    font-size: var(--text-size-small);
+    color: var(--color-text-third);
+}

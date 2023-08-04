@@ -1,0 +1,62 @@
+.page {
+    position: relative;
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    min-height: 100%;
+}
+
+.search-product{
+    display: grid;
+    grid-template-columns: 5fr 2fr 1.5fr;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.salesControl .warn{
+    font-size: var(--text-size-small);
+    color: red;
+    padding-left: 0.3rem;
+}
+
+.salesControl{
+    padding: 0 0 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr 0rem;
+    gap: 1rem;
+
+    transition: grid-template-columns 0.3s ease;
+}
+
+.salesControl.active{
+    grid-template-columns: 1fr 18rem;
+    gap: 2rem;
+}
+
+.left{
+    position: relative;
+}
+
+.salesControl .right{
+    position: relative;
+    height: 100%;
+    min-width: 18rem;
+    max-width: 18rem;
+    background-color: red;
+    transform: translateX(18rem);
+    transition: transform 0.3s ease;
+    
+}
+
+.salesControl .right.active{
+    transform: translateX(-0rem);
+}
+
+.salesControl .sale-details{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+.salesControl .table-container{
+    margin-top: 0.5rem;
+}

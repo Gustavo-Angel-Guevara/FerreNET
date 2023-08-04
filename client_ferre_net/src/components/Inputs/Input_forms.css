@@ -11,7 +11,7 @@
 .input-container label{
     position: absolute;
     left: 0.6rem;
-    top: -0.6rem;
+    top: -0.65rem;
     padding: 0 0.4rem;
     font-weight:var(--text-weight-medium);
     color: var(--color-text-primary);

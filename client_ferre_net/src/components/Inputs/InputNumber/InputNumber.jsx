@@ -1,7 +1,7 @@
 import React from 'react';
 import './InputNumber.css'
 
-const InputNumber = ({label, ...props}) =>{
+const InputNumber = ({label, style_container, ...props}) =>{
     
     const handleKeyPress = (e) => {
         console.log(e.keyCode)
@@ -11,7 +11,7 @@ const InputNumber = ({label, ...props}) =>{
     };
 
     return(
-        <div className='input-container'>
+        <div className='input-container' style={style_container}>
             <label>{label}</label>
             <input type='number' {...props} onKeyDown={handleKeyPress}/>
         </div>
