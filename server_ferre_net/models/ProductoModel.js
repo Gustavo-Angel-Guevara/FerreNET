@@ -14,17 +14,41 @@ class ProductoModel {
     this.id_proveedor = id_proveedor;
   }
 
-  guardar() {
+  guardar(newCode, resolve, reject) {
     const sentenciaSQL = `INSERT INTO producto (codigo, nombre, descripcion, marca, precio_unitario, precio_menudeo, precio_mayoreo, id_categoria, id_proveedor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    const values = [this.codigo, this.nombre, this.descripcion, this.marca, this.precio_unitario, this.precio_menudeo, this.precio_mayoreo, this.id_categoria, this.id_proveedor];
+    const values = [newCode, this.nombre, this.descripcion, this.marca, this.precio_unitario, this.precio_menudeo, this.precio_mayoreo, this.id_categoria, this.id_proveedor];
 
-    return new Promise((resolve, reject) => {
-      connection.query(sentenciaSQL, values, (err, result) => {
-        if (err) return reject(err);
-        return resolve(result);
-      });
+    connection.query(sentenciaSQL, values, (err, result) => {
+      if (err) return reject(err);
+      return resolve(result);
     });
   }
+
+
+  generateCode(){
+    let code = 'OC-0000'
+    return new Promise((resolve, reject) => {
+        let SentenciaSQL = `SELECT * FROM producto ORDER BY idproducto DESC LIMIT 1;
+        `
+        // Consulta la base de datos para obtener la última orden registrada
+        connection.query(`${SentenciaSQL}`, (err, rows) => {                
+                
+            if(rows.length != 0){
+                code = rows[0]['codigo']
+            }
+
+            //Genera nuevo código de orden
+            let formCode = code.split('-')[1]            
+            let codeNumber = parseInt(formCode)
+            let codeCeros = formCode.replace(`${codeNumber}`, '')                
+            let newCode = `OC-${codeCeros}${codeNumber + 1}`
+
+            // Llama a la función saveOrder() para almacenar la nueva orden
+            this.guardar(newCode, resolve, reject)
+        })
+    })
+  }
+
 
   obtenerPorId() {
     const sentenciaSQL = `SELECT * FROM producto WHERE idproducto = ?`;

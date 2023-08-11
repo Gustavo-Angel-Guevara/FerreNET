@@ -35,22 +35,25 @@ class ProductoController{
                 res.status(500).json({ error: "Error al obtener todos los productos" });
             });
     }
+
     guardar(req, res) {
-        const { codigo, nombre, descripcion, marca, precio_unitario, precio_menudeo, precio_mayoreo, id_categoria, id_proveedor } = req.body;
+        const {nombre, descripcion, marca, precio_unitario, precio_menudeo, precio_mayoreo, id_categoria, proveedor_pref } = req.body;
         
-        const producto = new ProductoModel(codigo, nombre, descripcion, marca, precio_unitario, precio_menudeo, precio_mayoreo, id_categoria, id_proveedor);
-      
-        producto.guardar()
+        const producto = new ProductoModel(null, null, nombre, descripcion, marca, precio_unitario, precio_menudeo, precio_mayoreo, id_categoria, proveedor_pref);
+        console.log(proveedor_pref)
+        producto.generateCode()
           .then(result => {
             // Procesar el resultado
             res.send(result);
           })
           .catch(err => {
+            console.log(err)
             // Manejar el error
             res.status(500).send(err);
           });
-      }
-      actualizar(req, res) {
+    }
+
+    actualizar(req, res) {
         const {idproducto,codigo,nombre,descripcion,marca,precio_unitario,precio_menudeo,precio_mayoreo,id_categoria,id_proveedor} = req.body;
     
         const producto = new ProductoModel(idproducto,codigo,nombre,descripcion,marca,precio_unitario,precio_menudeo,precio_mayoreo,id_categoria,id_proveedor
@@ -66,9 +69,9 @@ class ProductoController{
             // Manejar el error
             res.status(500).send(err);
           });
-      }
+    }
 
-      eliminar(req, res) {
+    eliminar(req, res) {
         const { idproducto } = req.params;
         const model = new ProductoModel();
 
@@ -84,7 +87,7 @@ class ProductoController{
         console.error("Error al eliminar el producto", err);
         res.status(500).json({ error: "Error al eliminar el producto" });
          });
-        }
+    }
 
 }   
     

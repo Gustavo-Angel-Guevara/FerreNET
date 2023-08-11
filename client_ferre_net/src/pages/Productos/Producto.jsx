@@ -8,6 +8,8 @@ import Table from '../../components/Table/Table';
 import ApiProductos from '../../services/ApiProductos';
 import InputText from '../../components/Inputs/InputText';
 import Context from '../../context/Interface';
+import InputSelect from '../../components/Inputs/InputSelect/InputDate';
+import InputPrice from '../../components/Inputs/InputPrice/InputPrice';
 
 
 const Producto = () => {
@@ -77,7 +79,7 @@ const Producto = () => {
       .then((res) => (res.ok ? res.json() : Promise.reject(res)))
       .then((json) => {
         console.log(json);
-        setNewData(json);
+        setNewData(json); 
       })
       .catch((err) => {
         console.log(err);
@@ -169,19 +171,19 @@ const Producto = () => {
             value={dataForm.marca}
             onChange={handleInputChange}
           />
-          <InputText
+          <InputPrice
             label={'Precio Unitario'}
             name='precio_unitario'
             value={dataForm.precio_unitario}
             onChange={handleInputChange}
           />
-          <InputText
+          <InputPrice
             label={'Precio Menudeo'}
             name='precio_menudeo'
             value={dataForm.precio_menudeo}
             onChange={handleInputChange}
           />
-          <InputText
+          <InputPrice
             label={'Precio Mayoreo'}
             name='precio_mayoreo'
             value={dataForm.precio_mayoreo}
@@ -193,12 +195,10 @@ const Producto = () => {
             value={dataForm.id_categoria}
             onChange={handleInputChange}
           />
-          <InputText
-            label={'Proveedor'}
-            name='id_proveedor'
-            value={dataForm.id_proveedor}
-            onChange={handleInputChange}
-          />
+
+          <InputSelect label={"Proveedor"} name="proveedor_pref" value={dataForm.proveedor_pref} onChange={handleInputChange}/>
+
+
           <ButtonPrimary label={'Crear'} onClick={createProducto} />
         </Form>
       </div>

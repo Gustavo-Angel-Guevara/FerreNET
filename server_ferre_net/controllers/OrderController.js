@@ -5,7 +5,6 @@ const OrderModel = require("../models/orderModel");
 class OrderController{
 
     newOrder(req, res){
-        
         let {fecha_creacion, status, producto, id_producto, cantidad, especificaciones, fecha_requerida, presupuesto_max, proveedor_pref} = req.body
         
         const Model = new OrderModel(null, fecha_creacion, status, producto, id_producto, cantidad, especificaciones, fecha_requerida, presupuesto_max, proveedor_pref)
