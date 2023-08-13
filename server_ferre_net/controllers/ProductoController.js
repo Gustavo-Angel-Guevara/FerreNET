@@ -12,14 +12,14 @@ class ProductoController{
         Model.obtenerPorId()
             .then(rows => {
                 if (rows.length > 0) {
-                    res.status(200).json(rows[0]);
+                    res.status(200).send({data:rows[0]});
                 } else {
-                    res.status(404).json({ error: "Producto no encontrado" });
+                    res.status(404).send({ error: "Producto no encontrado" });
                 }
             })
             .catch(err => {
                 console.error("Error al obtener el producto", err);
-                res.status(500).json({ error: "Error al obtener el producto" });
+                res.status(500).send({ error: "Error al obtener el producto" });
             });
     }
 
@@ -28,11 +28,11 @@ class ProductoController{
 
         model.obtenerTodos()
             .then(rows => {
-                res.status(200).json(rows);
+                res.status(200).send({data:rows});
             })
             .catch(err => {
                 console.error("Error al obtener todos los productos", err);
-                res.status(500).json({ error: "Error al obtener todos los productos" });
+                res.status(500).send({ error: "Error al obtener todos los productos" });
             });
     }
 

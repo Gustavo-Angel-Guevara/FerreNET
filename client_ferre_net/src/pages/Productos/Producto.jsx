@@ -12,6 +12,16 @@ import InputSelect from '../../components/Inputs/InputSelect/InputDate';
 import InputPrice from '../../components/Inputs/InputPrice/InputPrice';
 
 
+let initDataForm = {codigo: '',
+nombre: '',
+descripcion: '',
+marca: '',
+precio_unitario: '',
+precio_menudeo: '',
+precio_mayoreo: '',
+id_categoria: '',
+id_proveedor: ''}
+
 const Producto = () => {
   const [display, setDisplay] = useState('');
   const [dataForm, setDataForm] = useState({
@@ -26,7 +36,8 @@ const Producto = () => {
     id_proveedor: '',
   });
   const [newData, setNewData] = useState({});
-  const [productos, setProductos] = useState([]);
+  const [productos, setProductos] = useState(null);
+  const [displayForm2, setDisplayForm2] = useState('')
 
   const {menuHide} = useContext(Context);
 
@@ -34,7 +45,6 @@ const Producto = () => {
   useEffect(() => {
     new ApiProductos()
       .getProducts()
-      .then((res) => (res.ok ? res.json() : Promise.reject(res)))
       .then((json) => {
         const data = json.data;
         setProductos(data);
@@ -45,13 +55,19 @@ const Producto = () => {
       });
   }, [newData]);
 
-  const openForm = () => {
-    setDisplay('active');
-  };
+    const openForm = (numForm) =>{
+        if(numForm === 1){
+            setDisplay('active')
+            setDataForm(initDataForm)
+        }else if(numForm === 2){
+            setDisplayForm2('active')
+        }        
+    }
 
-  const closeForm = () => {
-    setDisplay('');
-  };
+    const closeForm = () => {
+        setDisplay('')
+        setDisplayForm2('')
+    }
 
   const handleInputChange = (e) => {
     setDataForm({
@@ -110,6 +126,50 @@ const Producto = () => {
       });
   };
 
+  const openFormUpdateOrder = (e) =>{
+    openForm(2)
+
+    let objApiOrdenes = new ApiProductos()
+    objApiOrdenes.setId = e.target.dataset.id
+
+    objApiOrdenes.getProductsById()
+    .then(res=>res.ok?res.json():Promise(res))
+    .then(json=>{
+      console.log(json.data)
+        const dataOrder = json.data
+        setDataForm(dataOrder)
+    })
+    .catch(err=>{
+        console.log("Error al Obtener los datos del producto")
+    })
+  }
+
+  const updateOrder = () =>{
+    let dataFormat = {...dataForm, presupuesto_max : dataForm.presupuesto_max.replace('$', '')}
+
+    const settings = {
+        method : 'PUT',
+        headers : {
+            'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify(dataFormat)
+    }
+
+    let objApiOrdenes = new ApiProductos()
+    objApiOrdenes.setSettings = settings
+
+    objApiOrdenes.createOC()
+    .then(res => res.ok ? res.json() : Promise.reject(res))
+    .then(json=>{
+        console.log(json)
+        setNewData(json)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+  }
+
+
   return (
     <div className={`page ${menuHide && 'active'}`}>
       <MenuLeft />
@@ -139,13 +199,15 @@ const Producto = () => {
                   'Proveedor',
                   'Acciones',
                 ]}
+                attr={['idproducto', 'codigo', 'nombre', 'descripcion', 'marca', 'precio_unitario', 'precio_menudeo', 'precio_mayoreo', 'nombre_categoria', 'proveedor']}
                 rowData={productos}
                 actions={'all'}
-                events={{ deleteProducto }}
+                events = {{delete:deleteProducto, openFormUpdate:openFormUpdateOrder}}
               ></Table>
             </div>
           )}
         </div>
+
         <Form title={'Crear Producto'} display={display} closeForm={closeForm}>
           <InputText
             label={'Código'}
@@ -201,6 +263,61 @@ const Producto = () => {
 
           <ButtonPrimary label={'Crear'} onClick={createProducto} />
         </Form>
+
+        <Form title={"Actualizar Producto"} display={displayForm2} closeForm={closeForm} name="Actualizar Productos">
+          <InputText
+            label={'Código'}
+            name='codigo'
+            value={dataForm.codigo}
+            onChange={handleInputChange}
+          />
+          <InputText
+            label={'Nombre'}
+            name='nombre'
+            value={dataForm.nombre}
+            onChange={handleInputChange}
+          />
+          <InputText
+            label={'Descripción'}
+            name='descripcion'
+            value={dataForm.descripcion}
+            onChange={handleInputChange}
+          />
+          <InputText
+            label={'Marca'}
+            name='marca'
+            value={dataForm.marca}
+            onChange={handleInputChange}
+          />
+          <InputPrice
+            label={'Precio Unitario'}
+            name='precio_unitario'
+            value={dataForm.precio_unitario}
+            onChange={handleInputChange}
+          />
+          <InputPrice
+            label={'Precio Menudeo'}
+            name='precio_menudeo'
+            value={dataForm.precio_menudeo}
+            onChange={handleInputChange}
+          />
+          <InputPrice
+            label={'Precio Mayoreo'}
+            name='precio_mayoreo'
+            value={dataForm.precio_mayoreo}
+            onChange={handleInputChange}
+          />
+          <InputText
+            label={'Categoría'}
+            name='id_categoria'
+            value={dataForm.id_categoria}
+            onChange={handleInputChange}
+          />
+
+          <InputSelect label={"Proveedor"} name="proveedor_pref" value={dataForm.proveedor_pref} onChange={handleInputChange}/>
+          <ButtonPrimary label={"Guardar"} onClick={updateOrder}/>
+        </Form> 
+
       </div>
     </div>
   );

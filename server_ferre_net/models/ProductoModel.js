@@ -63,7 +63,9 @@ class ProductoModel {
   }
 
   obtenerTodos() {
-    const sentenciaSQL = `SELECT * FROM producto`;
+    const sentenciaSQL = `SELECT *, proveedor.nombre AS proveedor FROM producto 
+    INNER JOIN proveedor on producto.id_proveedor = proveedor.idproveedor
+    JOIN categoria on producto.id_categoria = categoria.idcategoria`;
 
     return new Promise((resolve, reject) => {
       connection.query(sentenciaSQL, (err, rows) => {
