@@ -44,3 +44,44 @@
     cursor: pointer;
     margin: 0 0.6rem;
 }
+
+.sended{
+  background: rgb(221, 221, 221);
+  border-radius: 0.2rem;
+  padding: 0.2rem 0.5rem;
+  color: rgb(90, 90, 90);
+  font-size: 0.91rem;
+}
+
+.canceled{
+  background: rgb(221, 221, 221);
+  border-radius: 0.2rem;
+  padding: 0.2rem 0.5rem;
+  color: var(--color-error);
+  font-size: 0.91rem;
+}
+
+.progress{
+  background: rgb(221, 221, 221);
+  border-radius: 0.2rem;
+  padding: 0.2rem 0.5rem;
+  color: rgb(65, 65, 65);
+  font-size: 0.91rem;
+}
+
+.Onway{
+  background: rgb(221, 221, 221);
+  border-radius: 0.2rem;
+  padding: 0.2rem 0.5rem;
+  color: rgb(0, 116, 224);
+  font-size: 0.91rem;
+}
+
+.received{
+  background: rgb(221, 221, 221);
+  border-radius: 0.2rem;
+  padding: 0.2rem 0.5rem;
+  color: green;
+  font-size: 0.91rem;
+}
+

@@ -144,21 +144,25 @@ const MenuLeft = ()=>{
                                     </li>
                                 </Link>
 
-                                <li className='option-7'>
-                                    <div>
-                                        <img src="" alt="" />
-                                        <p>Ordenes Recibidas</p>
-                                    </div>
-                                </li>
+                                <Link to="/OrderReceived">
+                                    <li className='option-7'>
+                                        <div>
+                                            <img src="" alt="" />
+                                            <p>Ordenes Recibidas</p>
+                                        </div>
+                                    </li>
+                                </Link>
                             </ul>
                         </li>
-
-                        <li className='option-8'>
-                            <div>
-                                <img src={user} alt="" />
-                                <p>Gestión de Usuarios</p>
-                            </div>
-                        </li>
+                        
+                        <Link to={"/users"}>
+                            <li className='option-8'>
+                                <div>
+                                    <img src={user} alt="" />
+                                    <p>Gestión de Usuarios</p>
+                                </div>
+                            </li>
+                        </Link>
 
                         <Link to="/history"> 
                             <li className='option-9'>

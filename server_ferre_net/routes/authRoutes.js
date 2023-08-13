@@ -27,6 +27,13 @@ authRouter.post('/validate-token', (req, res)=>{
 
 authRouter.post('/login', objAuthController.login)
 authRouter.get('/cerrar-sesion', objAuthController.login)
+//authRouter.update('/user', objAuthController.update)
+authRouter.post('/user', objAuthController.create)
+authRouter.get('/user', objAuthController.getUsers)
+authRouter.get('/user/:id', objAuthController.getUserById)
+authRouter.put('/user', objAuthController.update)
+authRouter.delete('/user/:id', objAuthController.delete)
+
 
 //Agregar más rutas....
 

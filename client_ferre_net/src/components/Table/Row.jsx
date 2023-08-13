@@ -5,6 +5,7 @@ import delete_icon from '../../assets/icon/delete_icon.png'
 
 
 const Row = ({data, actions, events}) =>{
+
     return(
         <div className="table-row">
 
@@ -12,7 +13,11 @@ const Row = ({data, actions, events}) =>{
                 data &&
                     data.map((el, index)=>{
                         if(el === "Enviado"){
-                            return <div key={index} className="table-cell">{el}</div>
+                            return <div key={index} className="table-cell"><div data-id={data[0]} onClick={events.HandleStatus} className='sended'>{el}</div></div>
+                        }else if(el === "Cancelado"){
+                            return <div key={index} className="table-cell"><div data-id={data[0]} onClick={events.HandleStatus} className='canceled'>{el}</div></div>
+                        }else if(el === "En Progreso"){
+                            return <div key={index} className="table-cell"><div data-id={data[0]} onClick={events.HandleStatus} className='progress'>{el}</div></div>
                         }else{
                             return <div key={index} className="table-cell">{el}</div>
                         }

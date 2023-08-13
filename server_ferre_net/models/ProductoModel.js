@@ -26,7 +26,7 @@ class ProductoModel {
 
 
   generateCode(){
-    let code = 'OC-0000'
+    let code = 'PR-0000'
     return new Promise((resolve, reject) => {
         let SentenciaSQL = `SELECT * FROM producto ORDER BY idproducto DESC LIMIT 1;
         `
@@ -41,7 +41,7 @@ class ProductoModel {
             let formCode = code.split('-')[1]            
             let codeNumber = parseInt(formCode)
             let codeCeros = formCode.replace(`${codeNumber}`, '')                
-            let newCode = `OC-${codeCeros}${codeNumber + 1}`
+            let newCode = `PR-${codeCeros}${codeNumber + 1}`
 
             // Llama a la función saveOrder() para almacenar la nueva orden
             this.guardar(newCode, resolve, reject)

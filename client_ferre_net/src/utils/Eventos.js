@@ -1,17 +1,27 @@
 class Eventos{
 
     constructor(resize){
-        this.component = null;
-        this.componentToDisplay = null;
 
-        this.classOfComponent = null;
-        this.dataSet = null
-        this.componentsToSetData = null;
+        if(typeof Eventos.instance == "object"){
+            this.component = null;
+            this.componentToDisplay = null;
+    
+            this.classOfComponent = null;
+            this.dataSet = null
+            this.componentsToSetData = null;
+    
+            this.dataComponent = null
+            this.coordComponent = null;
+            this.targetDisplayed = '0';
+            this.idItem = null
+            this.resize = resize;
 
-        this.dataComponent = null
-        this.coordComponent = null;
+            return Eventos.instance
+        }
 
-        this.resize = resize;
+        Eventos.instance = this
+        return this
+        
     }
 
     set setComponent(component){
@@ -34,22 +44,32 @@ class Eventos{
         this.componentsToSetData = componentsToSetData
     }
 
+    set setTargetDisplayed(targetDisplayed){
+        this.targetDisplayed = targetDisplayed;
+    }
+
     get getCoord(){
         return this.coordComponent;
     }
 
-    resizeWindow(components){
+    get getIdItem(){
+        return this.idItem;
+    }
+
+    resizeWindow(component){
         window.addEventListener('resize', e=>{
-            console.log(e)
-            components.map(component=>{
+            try{
                 component.style.opacity = '0'
-            })
+                component.style.visibility = 'hidden'
+                this.targetDisplayed = '0'
+            }catch(err){
+
+            }
         })
     }
 
     getPositionByClick(event){
 
-        console.log(event)
         this.dataComponent = {
             top: event.target.offsetTop,
             left : event.target.offsetLeft,
@@ -62,66 +82,6 @@ class Eventos{
         Object.values(this.componentsToSetData).map(component =>{
             component[0].dataset[component[1]] = event.target.dataset[component[1]]
         })
-    }
-
-    displayOptions(event, componentToDisplay){
-
-        if(this.resize){
-            this.resizeWindow([componentToDisplay])
-        }
-
-        switch(event){
-            case 'click':
-
-                let targetDisplayed = '0';
-
-                if(!this.component && !this.classOfComponent){
-                    console.error("El atributo component es nulo o no es un componente HTML")
-                    return
-                }
-        
-                if(this.component){
-                    
-                }else if(this.classOfComponent){
-                    document.addEventListener('click', e=>{
-
-                        if(e.target.classList.contains('options') && e.target.tagName == 'IMG'){
-
-                            if(targetDisplayed == e.target.dataset[this.dataSet[0]]){
-                                componentToDisplay.style.opacity = '0'
-                                targetDisplayed = 0
-                                return
-                            }
-
-                            this.getPositionByClick(e)
-
-                            let dataComponentToDisplay = {
-                                top : componentToDisplay.offsetTop,
-                                left : componentToDisplay.offsetLeft,
-                                width : componentToDisplay.offsetWidth,
-                                height : componentToDisplay.offsetHeight,
-                            }
-
-                            const GuideComponent = this.dataComponent 
-    
-                            componentToDisplay.style.left = GuideComponent.left - dataComponentToDisplay.width;
-                            componentToDisplay.style.top = GuideComponent.top + 7;
-
-                            componentToDisplay.style.opacity = '1'
-                            console.log(componentToDisplay.dataset)
-                            
-                            this.setAttrToHtml(e)
-                        
-                            targetDisplayed = e.target.dataset[this.dataSet[0]]
-                        }    
-                        
-                    })
-                }    
-
-                break;
-        }       
-        
-
     }
 
     displayAComponent(){
@@ -151,7 +111,45 @@ class Eventos{
         this.coordComponent = coord;
 
     }
+    
+    displayOptions(){
 
+        this.resizeWindow(this.componentToDisplay)
+
+        if(!this.component){
+            console.error("El atributo component es nulo o no es un componente HTML")
+            return
+        }
+
+        if(this.targetDisplayed == this.component.target.dataset['id']){
+            this.componentToDisplay.style.opacity = '0'
+            this.targetDisplayed = '0'
+            return
+        }
+
+        this.getPositionByClick(this.component)  
+        let dataComponentToDisplay = {
+            top : this.componentToDisplay.offsetTop,
+            left : this.componentToDisplay.offsetLeft,
+            width : this.componentToDisplay.offsetWidth,
+            height : this.componentToDisplay.offsetHeight,
+        }
+
+        const GuideComponent = this.dataComponent 
+        
+        let coord = {
+            left : GuideComponent.left - dataComponentToDisplay.width - 5,
+            top : GuideComponent.top,
+        }
+
+        this.componentToDisplay.style.visibility = 'visible'
+        this.componentToDisplay.style.opacity = '1'
+
+        this.coordComponent = coord;
+        this.idItem = this.component.target.dataset['id'];
+        this.targetDisplayed = this.component.target.dataset['id']
+
+    }
 
 }
 
