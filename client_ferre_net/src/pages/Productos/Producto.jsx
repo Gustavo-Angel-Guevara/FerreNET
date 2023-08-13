@@ -10,6 +10,7 @@ import InputText from '../../components/Inputs/InputText';
 import Context from '../../context/Interface';
 import InputSelect from '../../components/Inputs/InputSelect/InputDate';
 import InputPrice from '../../components/Inputs/InputPrice/InputPrice';
+import Modal from "../../components/Modal/Modal";
 
 
 let initDataForm = {codigo: '',
@@ -38,6 +39,8 @@ const Producto = () => {
   const [newData, setNewData] = useState({});
   const [productos, setProductos] = useState(null);
   const [displayForm2, setDisplayForm2] = useState('')
+  const [displayModal, setDisplayModal] = useState(false)
+  const [idProv, setIdProv] = useState()
 
   const {menuHide} = useContext(Context);
 
@@ -102,23 +105,17 @@ const Producto = () => {
       });
   };
 
-  const deleteProducto = (e) => {
-    const idproducto = e.target.dataset.id;
-
+  const deleteProducto = (id) => {
     let apiProductos = new ApiProductos();
-    apiProductos.setIdProducto(idproducto);
+    apiProductos.setId = id;
 
     apiProductos
-      .eleteProducto()
-      .then((res) => (res ? res.json() : Promise.reject(res)))
+      .deleteProducto()
+      .then((res) => (res.ok ? res.json() : Promise.reject(res)))
       .then((json) => {
-        console.log(json);
-        if (json.status === true) {
-          console.log('Producto eliminado correctamente');
+          setDisplayModal(false)
           setNewData(json);
-        } else {
-          console.log('Error al eliminar el producto');
-        }
+        
       })
       .catch((err) => {
         console.log(err);
@@ -145,20 +142,19 @@ const Producto = () => {
   }
 
   const updateOrder = () =>{
-    let dataFormat = {...dataForm, presupuesto_max : dataForm.presupuesto_max.replace('$', '')}
 
     const settings = {
         method : 'PUT',
         headers : {
             'Content-Type' : 'application/json'
         },
-        body : JSON.stringify(dataFormat)
+        body : JSON.stringify(dataForm)
     }
 
     let objApiOrdenes = new ApiProductos()
     objApiOrdenes.setSettings = settings
 
-    objApiOrdenes.createOC()
+    objApiOrdenes.updateProduct()
     .then(res => res.ok ? res.json() : Promise.reject(res))
     .then(json=>{
         console.log(json)
@@ -169,16 +165,33 @@ const Producto = () => {
     })
   }
 
+  const deleteAction = (e) =>{
+
+    if(localStorage.getItem('deleteModal') === 'true'){
+        setIdProv(e.target.dataset.id)
+        deleteProducto(e.target.dataset.id)
+    }else{
+        setIdProv(e.target.dataset.id)
+        setDisplayModal(true)
+    }
+
+  }
 
   return (
     <div className={`page ${menuHide && 'active'}`}>
+
+      {displayModal &&
+          <Modal text={"¿Seguro de Eliminar este Producto?"} type={"delete-noAskAgain"} event = {deleteProducto} setDisplayModal = {setDisplayModal}/>
+      }
+
+
       <MenuLeft />
       <div className='container-page'>
         <Header title={'Productos'} />
         <div className='container'>
           <div className='btn-content'>
             <ButtonPrimary
-              onClick={openForm}
+              onClick={(e)=>openForm(1)}
               label={'Crear Producto'}
               style={{ width: '12rem', fontSize: '0.9rem' }}
             />
@@ -202,19 +215,13 @@ const Producto = () => {
                 attr={['idproducto', 'codigo', 'nombre', 'descripcion', 'marca', 'precio_unitario', 'precio_menudeo', 'precio_mayoreo', 'nombre_categoria', 'proveedor']}
                 rowData={productos}
                 actions={'all'}
-                events = {{delete:deleteProducto, openFormUpdate:openFormUpdateOrder}}
+                events = {{delete:deleteAction, openFormUpdate:openFormUpdateOrder}}
               ></Table>
             </div>
           )}
         </div>
 
         <Form title={'Crear Producto'} display={display} closeForm={closeForm}>
-          <InputText
-            label={'Código'}
-            name='codigo'
-            value={dataForm.codigo}
-            onChange={handleInputChange}
-          />
           <InputText
             label={'Nombre'}
             name='nombre'
@@ -258,7 +265,7 @@ const Producto = () => {
             onChange={handleInputChange}
           />
 
-          <InputSelect label={"Proveedor"} name="proveedor_pref" value={dataForm.proveedor_pref} onChange={handleInputChange}/>
+          <InputSelect label={"Proveedor"} name="id_proveedor" value={dataForm.id_proveedor} onChange={handleInputChange}/>
 
 
           <ButtonPrimary label={'Crear'} onClick={createProducto} />
@@ -270,6 +277,7 @@ const Producto = () => {
             name='codigo'
             value={dataForm.codigo}
             onChange={handleInputChange}
+            disabled
           />
           <InputText
             label={'Nombre'}
@@ -314,7 +322,7 @@ const Producto = () => {
             onChange={handleInputChange}
           />
 
-          <InputSelect label={"Proveedor"} name="proveedor_pref" value={dataForm.proveedor_pref} onChange={handleInputChange}/>
+          <InputSelect label={"Proveedor"} name="id_proveedor" value={dataForm.id_proveedor} onChange={handleInputChange}/>
           <ButtonPrimary label={"Guardar"} onClick={updateOrder}/>
         </Form> 
 

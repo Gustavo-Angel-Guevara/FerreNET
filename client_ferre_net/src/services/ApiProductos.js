@@ -47,7 +47,7 @@ class ApiProductos {
   }
 
   deleteProducto() {
-    return fetch(`http://${config.serverIP}:${config.port}/eliminarproducto/${this.productId}`, { method: 'DELETE' });
+    return fetch(`http://${config.serverIP}:${config.port}/productos/${this.id}`, { method: 'DELETE' });
   }
 
   getProductsById(){

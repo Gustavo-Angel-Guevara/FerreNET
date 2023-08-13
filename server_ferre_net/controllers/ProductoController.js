@@ -37,10 +37,10 @@ class ProductoController{
     }
 
     guardar(req, res) {
-        const {nombre, descripcion, marca, precio_unitario, precio_menudeo, precio_mayoreo, id_categoria, proveedor_pref } = req.body;
+        const {nombre, descripcion, marca, precio_unitario, precio_menudeo, precio_mayoreo, id_categoria, id_proveedor } = req.body;
         
-        const producto = new ProductoModel(null, null, nombre, descripcion, marca, precio_unitario, precio_menudeo, precio_mayoreo, id_categoria, proveedor_pref);
-        console.log(proveedor_pref)
+        const producto = new ProductoModel(null, null, nombre, descripcion, marca, precio_unitario, precio_menudeo, precio_mayoreo, id_categoria, id_proveedor);
+        console.log(id_proveedor)
         producto.generateCode()
           .then(result => {
             // Procesar el resultado
@@ -72,20 +72,17 @@ class ProductoController{
     }
 
     eliminar(req, res) {
-        const { idproducto } = req.params;
+        const { id } = req.params;
         const model = new ProductoModel();
-
-        model.eliminar(idproducto)
+        model.idproducto = id;
+        console.log(id)
+        model.eliminar()
         .then(result => {
-         if (result.affectedRows > 0) {
-            res.status(200).json({ message: "Producto eliminado exitosamente" });
-        } else {
-            res.status(404).json({ error: "Producto no encontrado" });
-        }
+            res.send({ message: "Producto eliminado exitosamente" })
         })
         .catch(err => {
-        console.error("Error al eliminar el producto", err);
-        res.status(500).json({ error: "Error al eliminar el producto" });
+            console.error("Error al eliminar el producto", err);
+            res.status(500).send({ error: "Error al eliminar el producto" });
          });
     }
 

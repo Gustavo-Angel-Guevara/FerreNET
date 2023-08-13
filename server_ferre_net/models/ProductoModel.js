@@ -63,7 +63,7 @@ class ProductoModel {
   }
 
   obtenerTodos() {
-    const sentenciaSQL = `SELECT *, proveedor.nombre AS proveedor FROM producto 
+    const sentenciaSQL = `SELECT *, producto.nombre AS nombre, proveedor.nombre AS proveedor FROM producto 
     INNER JOIN proveedor on producto.id_proveedor = proveedor.idproveedor
     JOIN categoria on producto.id_categoria = categoria.idcategoria`;
 
