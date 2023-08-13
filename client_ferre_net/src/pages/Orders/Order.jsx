@@ -15,7 +15,7 @@ import InputDate from '../../components/Inputs/InputDate/InputDate';
 import InputSelect from '../../components/Inputs/InputSelect/InputDate';
 import DateUtils from '../../utils/DateUtils';
 
-import Context from '../../context/Interface';
+import Context from '../../context/Global';
 
 
 let initDataForm = {id_producto:'', producto:'', cantidad:'0', especificaciones:'', status:'Enviado', fecha_creacion:new DateUtils().getCurrentDate() ,fecha_requerida:'', presupuesto_max:'$', proveedor_pref:''}

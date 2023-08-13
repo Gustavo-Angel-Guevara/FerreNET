@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import './Login.css'
 
@@ -9,8 +9,12 @@ import icon_ok from '../../assets/icon/icon_ok.png'
 import logo from '../../assets/images/Logo_Dark.png'
 import Input from '../../components/Inputs/Input'
 import ButtonPrimary from '../../components/ButtonPrimary/ButtonPrimary'
-import { json, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+
 import ApiUser from '../../services/ApiUsers'
+
+import Context from '../../context/Global';
+
 
 const Login = () =>{
 
@@ -18,6 +22,8 @@ const Login = () =>{
     const [activeArticle, setActiveArticle] = useState(null);
     const [error, setError] = useState(null)
     const navigate = useNavigate();
+
+    const {setDataUser} = useContext(Context)
 
     const handleClickSetActive = (e, rol) =>{
         setActiveArticle(rol)
@@ -31,9 +37,8 @@ const Login = () =>{
     }
 
     const handleClick = e =>{
-
         if(dataForm.id === "" || dataForm.psw === "" || dataForm.rol === "") return
-
+        console.log("DWdwdwd")
         const settings = {
             method : 'POST',
             headers : {
@@ -56,6 +61,7 @@ const Login = () =>{
         .then(json =>{
             setError(null)
             localStorage.setItem('user','true')
+            localStorage.setItem('session', json.token)
             navigate("/");
         })
         .catch(err=>{

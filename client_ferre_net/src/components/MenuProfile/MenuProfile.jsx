@@ -3,6 +3,10 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 const MenuProfile = ({reference, active, ...props}) => {
+
+    const exit = () =>{
+        localStorage.removeItem('session')
+    }
     
     return(
         <div ref={reference} className={`menu-profile-container ${active && 'active'}`} {...props}>
@@ -14,7 +18,7 @@ const MenuProfile = ({reference, active, ...props}) => {
         
             <nav>
                 <ul>
-                    <Link to="/login">
+                    <Link onClick={exit} to="/login">
                         <li>Cerrar Sesión</li>
                     </Link>
                 </ul>

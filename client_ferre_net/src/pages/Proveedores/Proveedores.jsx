@@ -8,7 +8,7 @@ import InputText from '../../components/Inputs/InputText';
 import Form from '../../components/Form/Form';
 import Modal from '../../components/Modal/Modal';
 
-import Context from '../../context/Interface';
+import Context from '../../context/Global';
 
 
 let initDataForm = {idproveedor:'', nombre:'', correo:'', telefono:'', direccion:'', sitio_web:''}

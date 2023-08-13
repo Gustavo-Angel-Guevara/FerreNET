@@ -1,15 +1,17 @@
 const { createContext, useState } = require("react")
 
-
 const Context = createContext()
 
 const Provider = ({children}) => {
 
     const [menuHide, setMenuHide] = useState(false);
+    const [dataUser, setDataUser] = useState({})
 
     let data = {
         setMenuHide,
-        menuHide
+        menuHide,
+        dataUser,
+        setDataUser
     }
 
     return(       

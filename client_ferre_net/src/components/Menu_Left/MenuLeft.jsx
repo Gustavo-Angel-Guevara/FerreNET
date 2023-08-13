@@ -6,13 +6,12 @@ import products from '../../assets/icon/products_icon.png'
 import proveedores from '../../assets/icon/proveedores_icon.png'
 import user from '../../assets/icon/user_icon.png'
 import left_arrow from '../../assets/icon/left_arrow.png'
-import out from '../../assets/icon/out_icon.png'
 import icon_ok from '../../assets/icon/icon_ok.png'
 
 import './MenuLeft.css';
 import { Link } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
-import Context from '../../context/Interface'
+import Context from '../../context/Global'
 import Modal from '../Modal/Modal'
 
 let flag = false;
@@ -172,12 +171,6 @@ const MenuLeft = ()=>{
                         
                     </div>
 
-                    <li className='option-10'>
-                        <div>
-                            <img src={out} alt="" />
-                            <p>Salir</p>
-                        </div>
-                    </li>
                 </ul>
             </nav>
         </div>

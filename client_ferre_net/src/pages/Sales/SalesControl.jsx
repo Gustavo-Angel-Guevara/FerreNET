@@ -14,7 +14,7 @@ import { SalesControlClass } from "../../utils/salesControl";
 import DateUtils from "../../utils/DateUtils";
 import Modal from "../../components/Modal/Modal";
 
-import Context from '../../context/Interface';
+import Context from '../../context/Global';
 
 
 const SalesControl = () =>{

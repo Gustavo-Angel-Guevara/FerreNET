@@ -7,7 +7,7 @@ import Form from '../../components/Form/Form';
 import Table from '../../components/Table/Table';
 import ApiProductos from '../../services/ApiProductos';
 import InputText from '../../components/Inputs/InputText';
-import Context from '../../context/Interface';
+import Context from '../../context/Global';
 import InputSelect from '../../components/Inputs/InputSelect/InputDate';
 import InputPrice from '../../components/Inputs/InputPrice/InputPrice';
 import Modal from "../../components/Modal/Modal";

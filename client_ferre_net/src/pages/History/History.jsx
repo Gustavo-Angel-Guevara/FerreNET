@@ -3,7 +3,7 @@ import MenuLeft from '../../components/Menu_Left/MenuLeft';
 import Header from "../../components/Header/Header";
 import Table from "../../components/Table/Table";
 
-import Context from '../../context/Interface';
+import Context from '../../context/Global';
 
 
 const History = ()=>{
