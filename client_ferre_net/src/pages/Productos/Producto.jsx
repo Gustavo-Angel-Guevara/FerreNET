@@ -115,10 +115,8 @@ const Producto = () => {
       .then((json) => {
           setDisplayModal(false)
           setNewData(json);
-        
       })
       .catch((err) => {
-        console.log(err);
         console.log('Error. Intenta más tarde');
       });
   };
@@ -132,7 +130,6 @@ const Producto = () => {
     objApiOrdenes.getProductsById()
     .then(res=>res.ok?res.json():Promise(res))
     .then(json=>{
-      console.log(json.data)
         const dataOrder = json.data
         setDataForm(dataOrder)
     })
@@ -157,7 +154,6 @@ const Producto = () => {
     objApiOrdenes.updateProduct()
     .then(res => res.ok ? res.json() : Promise.reject(res))
     .then(json=>{
-        console.log(json)
         setNewData(json)
     })
     .catch(err=>{
@@ -166,7 +162,6 @@ const Producto = () => {
   }
 
   const deleteAction = (e) =>{
-
     if(localStorage.getItem('deleteModal') === 'true'){
         setIdProv(e.target.dataset.id)
         deleteProducto(e.target.dataset.id)
@@ -174,7 +169,6 @@ const Producto = () => {
         setIdProv(e.target.dataset.id)
         setDisplayModal(true)
     }
-
   }
 
   return (

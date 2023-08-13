@@ -23,7 +23,6 @@ app.use((req, res, next) => {
   next();
 })
 
-
 // === RUTAS ===npm
 
 // Aquí se definen las rutas del servidor

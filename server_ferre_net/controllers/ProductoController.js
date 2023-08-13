@@ -75,7 +75,6 @@ class ProductoController{
         const { id } = req.params;
         const model = new ProductoModel();
         model.idproducto = id;
-        console.log(id)
         model.eliminar()
         .then(result => {
             res.send({ message: "Producto eliminado exitosamente" })

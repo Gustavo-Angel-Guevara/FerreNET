@@ -1,4 +1,6 @@
 const connection = require("./conexion");
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 
 class UserModel{
@@ -67,7 +69,13 @@ class UserModel{
           connection.query(sentenciaSQL, (err, rows) => {
             if (err) return reject(err);
             if(rows.length == 0) return reject("Error en la contraseña, id o rol")
-            return resolve(rows);
+            
+            const user = { id: rows[0]['idusuarios'], user: rows[0]['id'] };
+            const secretKey = process.env.SECRET_KEY;
+
+            const token = jwt.sign(user, secretKey, { expiresIn: '1h' });
+
+            return resolve({rows, token});
           });
         });
     }

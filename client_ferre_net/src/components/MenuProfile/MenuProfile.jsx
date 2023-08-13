@@ -1,4 +1,6 @@
 import './MenuProfile.css'
+import React from 'react';
+import { Link } from 'react-router-dom'
 
 const MenuProfile = ({reference, active, ...props}) => {
     
@@ -12,7 +14,9 @@ const MenuProfile = ({reference, active, ...props}) => {
         
             <nav>
                 <ul>
-                    <li>Cerrar Sesión</li>
+                    <Link to="/login">
+                        <li>Cerrar Sesión</li>
+                    </Link>
                 </ul>
             </nav>
         </div>

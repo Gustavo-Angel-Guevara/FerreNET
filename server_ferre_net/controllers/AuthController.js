@@ -7,7 +7,6 @@ class AuthController{
     login(req, res){
 
         const {id, psw, rol} = req.body
-
         const userModel = new UserModel()
         userModel.setPassword = psw;
         userModel.setId = id;
@@ -17,7 +16,9 @@ class AuthController{
         .then(result =>{
             res.send({
                 'status':true,
-                'msg' : "Usuario Autenticado"
+                'msg' : "Usuario Autenticado",
+                'data':result.rows,
+                'token':result.token
             })
         })
         .catch(err=>{
