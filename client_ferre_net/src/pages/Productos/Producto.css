@@ -19,3 +19,14 @@
     position: relative;
   }
   
+
+  .extra-info{
+    margin-bottom: 0.8rem;
+    margin-top: 0.2rem; 
+  }
+
+  .match{
+    color: var(--color-primary);
+    font-size: calc(var(--text-size-small) - 0.05rem);
+    cursor: pointer;
+  }

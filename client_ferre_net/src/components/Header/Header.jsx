@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import Eventos from '../../utils/Eventos';
 
 
-const Header = ({title})=>{
+const Header = ({title, children})=>{
 
     const [coord, setCoord] = useState({top:'0px', left:'0px', bottom:'0px', right:'0px'})
     const [activeMenuProfile, setActiveMenuProfile] = useState(false)
@@ -41,8 +41,9 @@ const Header = ({title})=>{
 
             <MenuProfile reference={menuProfile} active={activeMenuProfile} style={{...coord}}/>
             
-            <div>
+            <div className='left'>
                 <p>{title}</p>
+                {children}
             </div>
 
             <div className='right'>

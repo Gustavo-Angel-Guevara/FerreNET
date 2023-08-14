@@ -1,3 +1,4 @@
+const InventarioModel = require("../models/InventarioModel");
 const ProductoModel = require("../models/ProductoModel");
 const connection = require("../models/conexion");
 
@@ -25,7 +26,6 @@ class ProductoController{
 
     obtenerTodos(req, res) {
         const model = new ProductoModel();
-
         model.obtenerTodos()
             .then(rows => {
                 res.status(200).send({data:rows});
@@ -37,10 +37,11 @@ class ProductoController{
     }
 
     guardar(req, res) {
-        const {nombre, descripcion, marca, precio_unitario, precio_menudeo, precio_mayoreo, id_categoria, id_proveedor } = req.body;
-        
+        const {nombre, descripcion, marca, precio_unitario, precio_menudeo, cantidad, precio_mayoreo, id_categoria, id_proveedor } = req.body;
+        const objInventario = new InventarioModel(null, cantidad)
         const producto = new ProductoModel(null, null, nombre, descripcion, marca, precio_unitario, precio_menudeo, precio_mayoreo, id_categoria, id_proveedor);
-        console.log(id_proveedor)
+        
+        producto.setInventario = objInventario
         producto.generateCode()
           .then(result => {
             // Procesar el resultado
@@ -82,6 +83,20 @@ class ProductoController{
         .catch(err => {
             console.error("Error al eliminar el producto", err);
             res.status(500).send({ error: "Error al eliminar el producto" });
+         });
+    }
+
+    search(req, res) {
+        const { term } = req.params;
+        const model = new ProductoModel();
+        model.idproducto = term;
+        model.search()
+        .then(result => {
+            res.send({ message: "Coincidencias", data:result})
+        })
+        .catch(err => {
+            console.error("Sin Coincidencias", err);
+            res.status(500).send({ error: "Coincidencias" });
          });
     }
 

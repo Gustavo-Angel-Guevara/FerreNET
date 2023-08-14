@@ -49,3 +49,45 @@
 .container-modal  h3:hover{
     cursor: default;
 }
+
+.container-modal .modal.data{
+    height: 20rem;
+    width: 35rem;
+    overflow: scroll;
+}
+
+
+.container-modal .products{
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 1rem;
+}
+
+.container-modal article{
+    border: 1px solid var(--color-primary);
+    border-radius: 0.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.container-modal article:active{
+    background-color: var(--color-second);
+}
+
+.container-modal .products p{
+    text-align: left;
+}
+
+.container-modal .products p:first-child{
+
+    font-weight: 500;
+}
+
+.container-modal .products div{
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}

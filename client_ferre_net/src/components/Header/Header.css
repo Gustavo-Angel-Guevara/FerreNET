@@ -25,3 +25,13 @@
     width: 1.25rem;
     height: 1.25rem;
 }
+
+.header .left{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.header .left div{
+    width: 20rem;
+}

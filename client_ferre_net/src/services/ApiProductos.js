@@ -38,12 +38,16 @@ class ApiProductos {
       });
   }
 
+  getInventory(){
+    return fetch(`http://${config.serverIP}:${config.port}/inventario`);
+  }
+
   createProduct() {
     return fetch(`http://${config.serverIP}:${config.port}/nuevoproducto`, this.settings);
   }
 
   updateProduct() {
-    return fetch(`http://${config.serverIP}:${config.port}/actualizarproducto/${this.productId}`, this.settings);
+    return fetch(`http://${config.serverIP}:${config.port}/actualizarproducto`, this.settings);
   }
 
   deleteProducto() {
@@ -52,6 +56,14 @@ class ApiProductos {
 
   getProductsById(){
     return fetch(`http://${config.serverIP}:${config.port}/productos/${this.id}`, {method: 'GET'})
+  }
+
+  searchProductByTerm(){
+    return fetch(`http://${config.serverIP}:${config.port}/searchProducts/${this.id}`, {method: 'GET'})
+  }
+
+  updateInventory() {
+    return fetch(`http://${config.serverIP}:${config.port}/actualizarinventario`, this.settings);
   }
 
 }

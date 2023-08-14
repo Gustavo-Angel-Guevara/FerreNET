@@ -12,6 +12,12 @@ class ProductoModel {
     this.precio_mayoreo = precio_mayoreo;
     this.id_categoria = id_categoria;
     this.id_proveedor = id_proveedor;
+
+    this.Inventario = null;
+  }
+
+  set setInventario(Inventario){
+    this.Inventario = Inventario
   }
 
   guardar(newCode, resolve, reject) {
@@ -20,7 +26,15 @@ class ProductoModel {
 
     connection.query(sentenciaSQL, values, (err, result) => {
       if (err) return reject(err);
-      return resolve(result);
+      
+      const sentenciaSQL = `INSERT INTO inventario (id_producto, cantidad, fecha_entrada, fecha_ultima_actualizacion, id_sucursal) VALUES (?, ?, ?, ?, ?)`;
+      const values = [parseInt(result['insertId']), this.Inventario.cantidad, '', '', '1'];
+  
+      connection.query(sentenciaSQL, values, (err, result) => {
+        if (err) return reject(err);
+        return resolve(result);
+      });
+
     });
   }
 
@@ -51,7 +65,9 @@ class ProductoModel {
 
 
   obtenerPorId() {
-    const sentenciaSQL = `SELECT * FROM producto WHERE idproducto = ?`;
+    const sentenciaSQL = `SELECT * FROM producto 
+    INNER JOIN inventario ON inventario.id_producto = producto.idproducto
+    WHERE idproducto = ?`;
     const values = [this.idproducto];
 
     return new Promise((resolve, reject) => {
@@ -65,6 +81,7 @@ class ProductoModel {
   obtenerTodos() {
     const sentenciaSQL = `SELECT *, producto.nombre AS nombre, proveedor.nombre AS proveedor FROM producto 
     INNER JOIN proveedor on producto.id_proveedor = proveedor.idproveedor
+    INNER JOIN inventario on inventario.id_producto = producto.idproducto
     JOIN categoria on producto.id_categoria = categoria.idcategoria`;
 
     return new Promise((resolve, reject) => {
@@ -98,6 +115,17 @@ class ProductoModel {
       });
     });
   }
+
+  search() {
+    const sentenciaSQL = `SELECT * FROM producto WHERE nombre LIKE '%${this.idproducto}%' OR codigo LIKE '%${this.idproducto}%'`;
+    return new Promise((resolve, reject) => {
+      connection.query(sentenciaSQL, (err, result) => {
+        if (err) return reject(err);
+        return resolve(result);
+      });
+    });
+  }
+
 }
 
 module.exports = ProductoModel;

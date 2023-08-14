@@ -38,7 +38,7 @@ class SalesControl{
             this.quantiyProducts = 0;
             this.monto = 0;
             this.error = "";
-
+            this.data = null
             SalesControl.instace = this;
             return this
         }
@@ -46,6 +46,9 @@ class SalesControl{
         return SalesControl.instace        
     }
 
+    set setData(data){
+        this.data = data
+    }
 
     set setProduct(product){
         this.product = product;
@@ -64,7 +67,17 @@ class SalesControl{
     }
 
     searchProduct(productTerm, products, setProducts, cantidad){
-        let product = JSON.parse(JSON.stringify(data[productTerm]));
+
+        data = this.data
+
+        let productFindIt = data.find(el=>el.codigo == productTerm);
+
+        if(!productFindIt){
+            this.error = "Este Producto No Existe";
+            return false
+        }
+
+        let product = JSON.parse(JSON.stringify(productFindIt));
 
         if(cantidad === 0) cantidad = null;
 
@@ -144,6 +157,7 @@ class SalesControl{
     }
 
     removeProduct(idProduct, products, setProducts){
+        console.log("Products of Sales Control:", idProduct)
         this.quantiyProducts = this.quantiyProducts - products[idProduct]['Cantidadtems']
         this.monto = this.monto - products[idProduct]['total'].replace('$', '')
 

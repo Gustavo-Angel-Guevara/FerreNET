@@ -10,6 +10,8 @@ const objController = new Controller()
 //nameRouter.post('/...', objController.fun1)
 //nameRouter.get('/...', objController.fun2)
 inventarioruta.put('/actualizarinventario', objController.actualizar)
+inventarioruta.get('/inventario', objController.getInventario)
+
 //nameRouter.delete('/...', objController.fun2)
 
 //Agregar más rutas....

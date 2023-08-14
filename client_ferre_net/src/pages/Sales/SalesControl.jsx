@@ -15,6 +15,7 @@ import DateUtils from "../../utils/DateUtils";
 import Modal from "../../components/Modal/Modal";
 
 import Context from '../../context/Global';
+import ApiProductos from "../../services/ApiProductos";
 
 
 const SalesControl = () =>{
@@ -22,6 +23,7 @@ const SalesControl = () =>{
     const [dataForm, setDataForm] = useState({product:'', cantidad:1, cantidadTotal:0, monto:'', recibe:'', change:'', date: new DateUtils().getCurrentDate() })
     const [display, setDisplay] = useState("")
     const [products, setProducts] = useState([]);
+
 
     const [error, setError] = useState(null)
 
@@ -31,11 +33,26 @@ const SalesControl = () =>{
     const {menuHide, setMenuHide} = useContext(Context);
 
     useEffect(()=>{
+
         window.addEventListener('resize', resposive)
+
+        new ApiProductos()
+        .getInventory()
+        .then(res=>res.ok ? res.json():Promise(res))
+        .then((json) => {
+            let objSalesControl = new SalesControlClass()
+            const data = json.data;
+            console.log(data)
+            objSalesControl.setData = data
+        })
+        .catch((err) => {
+          console.error(err);
+        });
 
         return () => {
         window.removeEventListener('resize', resposive)
         }
+
     })
 
     const resposive = (e) =>{
@@ -89,7 +106,7 @@ const SalesControl = () =>{
 
         if(localStorage.getItem('deleteModal') === 'true'){
             setIdProv(e.target.dataset.id)
-            removeItem()
+            removeItem(e.target.dataset.id)
         }else{
             setIdProv(e.target.dataset.id)
             setDisplayModal(true)
@@ -97,9 +114,11 @@ const SalesControl = () =>{
 
     }
 
-    const removeItem = (e) =>{
+    const removeItem = (id) =>{
+
+        console.log("Sales Control JSX ", products)
         let objSalesControl = new SalesControlClass()
-        objSalesControl.removeProduct(idProv, products, setProducts)
+        objSalesControl.removeProduct(id, products, setProducts)
         setDataForm({...dataForm, cantidadTotal:objSalesControl.getQuantiyProducts, monto:`$${objSalesControl.getMonto}`})
         setDisplayModal(false)
     }
@@ -115,7 +134,7 @@ const SalesControl = () =>{
             }
 
             <div className='container-page'>
-                <Header title={"Caja"}/>
+                <Header title={"Caja"}></Header>
 
                 <div className={`salesControl ${display}`}>
                     <section className="left">
