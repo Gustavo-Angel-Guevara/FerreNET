@@ -128,12 +128,15 @@ const MenuLeft = ()=>{
                             </div>
 
                             <ul className={`almacen-menu ${active}`}>
-                                <li className='option-5'>
-                                    <div>
-                                        <img src="" alt="" />
-                                        <p>Almacén</p>
-                                    </div>
-                                </li>
+
+                                <Link  to={"/inventario"}>
+                                    <li className='option-5'>
+                                        <div>
+                                            <img src="" alt="" />
+                                            <p>Almacén</p>
+                                        </div>
+                                    </li>
+                                </Link>
 
                                 <Link to="/orders">
                                     <li className='option-6'>
